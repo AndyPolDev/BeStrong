@@ -44,14 +44,7 @@ class MainViewController: UIViewController {
         return button
     }()
     
-    private let workoutTodayLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Workout Today"
-        label.textColor = .specialLightBrown
-        label.font = .robotoMedium14()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let workoutTodayLabel = UILabel(text: "Workout Today")
     
     private let tableView: UITableView = {
         let tableView = UITableView()

@@ -1,6 +1,5 @@
 import UIKit
 
-
 class WorkoutTableViewCell: UITableViewCell {
     
     private let backgroundCell: UIView = {
@@ -103,6 +102,8 @@ class WorkoutTableViewCell: UITableViewCell {
         print("Button pressed")
     }
 }
+
+//MARK: - Set Constraints
 
 extension WorkoutTableViewCell {
     private func setConstraints() {
