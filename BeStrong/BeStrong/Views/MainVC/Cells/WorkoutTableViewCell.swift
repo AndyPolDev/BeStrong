@@ -54,7 +54,7 @@ class WorkoutTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var startButton: UIButton = {
+    private lazy var startButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 10
         button.addShadowOnView()
@@ -67,7 +67,7 @@ class WorkoutTableViewCell: UITableViewCell {
         return button
     }()
     
-    var labelStackView = UIStackView()
+    private var labelStackView = UIStackView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

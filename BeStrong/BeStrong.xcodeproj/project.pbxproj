@@ -12,6 +12,8 @@
 		84717E5528BD35F800737FA7 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84717E5428BD35F800737FA7 /* StatisticViewController.swift */; };
 		84717E5928BD443100737FA7 /* ExercisesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84717E5828BD443100737FA7 /* ExercisesTableViewCell.swift */; };
 		84717E5B28BD55BB00737FA7 /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84717E5A28BD55BB00737FA7 /* UILabel + Extension.swift */; };
+		84723DF828C3C4A30097A316 /* DateAndRepeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84723DF728C3C4A30097A316 /* DateAndRepeatView.swift */; };
+		84723DFA28C3EED40097A316 /* RepsOrTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84723DF928C3EED40097A316 /* RepsOrTimerView.swift */; };
 		848F30CE28B6C2E700BF1EFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F30CD28B6C2E700BF1EFF /* AppDelegate.swift */; };
 		848F30D028B6C2E700BF1EFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F30CF28B6C2E700BF1EFF /* SceneDelegate.swift */; };
 		848F30D228B6C2E700BF1EFF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F30D128B6C2E700BF1EFF /* MainViewController.swift */; };
@@ -35,6 +37,8 @@
 		84717E5428BD35F800737FA7 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		84717E5828BD443100737FA7 /* ExercisesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewCell.swift; sourceTree = "<group>"; };
 		84717E5A28BD55BB00737FA7 /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
+		84723DF728C3C4A30097A316 /* DateAndRepeatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndRepeatView.swift; sourceTree = "<group>"; };
+		84723DF928C3EED40097A316 /* RepsOrTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsOrTimerView.swift; sourceTree = "<group>"; };
 		848F30CA28B6C2E700BF1EFF /* BeStrong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeStrong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848F30CD28B6C2E700BF1EFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		848F30CF28B6C2E700BF1EFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +83,15 @@
 				84717E5828BD443100737FA7 /* ExercisesTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		84723DF628C3C41A0097A316 /* NewWorkoutVC */ = {
+			isa = PBXGroup;
+			children = (
+				84723DF728C3C4A30097A316 /* DateAndRepeatView.swift */,
+				84723DF928C3EED40097A316 /* RepsOrTimerView.swift */,
+			);
+			path = NewWorkoutVC;
 			sourceTree = "<group>";
 		};
 		848F30C128B6C2E700BF1EFF = {
@@ -133,9 +146,9 @@
 		848F30E828B6C54600BF1EFF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8491F73528C26CF7007818E0 /* MainTabBarController.swift */,
 				848F30D128B6C2E700BF1EFF /* MainViewController.swift */,
 				84717E5428BD35F800737FA7 /* StatisticViewController.swift */,
-				8491F73528C26CF7007818E0 /* MainTabBarController.swift */,
 				8491F73728C27606007818E0 /* NewWorkoutViewController.swift */,
 			);
 			path = Controllers;
@@ -183,6 +196,7 @@
 			children = (
 				84C3748E28B8121200FEC230 /* MainVC */,
 				84717E5628BD435900737FA7 /* StatisticsVC */,
+				84723DF628C3C41A0097A316 /* NewWorkoutVC */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -292,6 +306,8 @@
 				8491F73828C27606007818E0 /* NewWorkoutViewController.swift in Sources */,
 				84C3749028B8122400FEC230 /* CalendarView.swift in Sources */,
 				848F30D028B6C2E700BF1EFF /* SceneDelegate.swift in Sources */,
+				84723DF828C3C4A30097A316 /* DateAndRepeatView.swift in Sources */,
+				84723DFA28C3EED40097A316 /* RepsOrTimerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
