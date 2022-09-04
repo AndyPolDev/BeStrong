@@ -34,7 +34,6 @@ class DateAndRepeatView: UIView {
         repeatSwitch.isOn = true
         repeatSwitch.onTintColor = .specialGreen
         repeatSwitch.translatesAutoresizingMaskIntoConstraints = false
-        repeatSwitch.addTarget(self, action: #selector(repeatSwitchSwitched), for: .valueChanged)
         return repeatSwitch
     }()
     
@@ -74,10 +73,13 @@ class DateAndRepeatView: UIView {
         addSubview(secondLineStackView)
     }
     
-    @objc private func repeatSwitchSwitched() {
-        print("Switch work")
+    private func getDateAndReapete() -> (Date, Bool) {
+        (datePicker.date, repeatSwitch.isOn)
     }
     
+    public func setDateAndRepeat() -> (Date, Bool) {
+        getDateAndReapete()
+    }
 }
 
 //MARK: - Set Constraints
