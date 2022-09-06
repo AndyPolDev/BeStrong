@@ -4,13 +4,13 @@ class RepsOrTimerView: UIView {
     
     private let setsLabel = UILabel(text: "Sets", font: .robotoMedium18(), textColor: .specialGray)
     
-    private var countSetsLabel = UILabel(text: "3", font: .robotoMedium24(), textColor: .specialGray)
+    private var countSetsLabel = UILabel(text: "0", font: .robotoMedium24(), textColor: .specialGray)
     
     private lazy var setsSlider: UISlider = {
         let slider = UISlider()
-        slider.minimumValue = 1
+        slider.minimumValue = 0
         slider.maximumValue = 6
-        slider.value = 3
+        slider.value = 0
         slider.maximumTrackTintColor = .specialLightBrown
         slider.minimumTrackTintColor = .specialGreen
         slider.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +38,7 @@ class RepsOrTimerView: UIView {
     
     private let timerLabel = UILabel(text: "Timer", font: .robotoMedium18(), textColor: .specialGray)
     
-    private var countTimerLabel = UILabel(text: "0", font: .robotoMedium24(), textColor: .specialGray)
+    private var countTimerLabel = UILabel(text: "0 sec", font: .robotoMedium24(), textColor: .specialGray)
     
     private lazy var timerSlider: UISlider = {
         let slider = UISlider()
@@ -133,8 +133,21 @@ class RepsOrTimerView: UIView {
         return (setsSliderValue, repsSliderValue, timerSliderValue)
     }
     
-    public func setSliderValue() -> (Int, Int, Int) {
+    internal func setSliderValue() -> (Int, Int, Int) {
         getSliderValue()
+    }
+    
+    private func refreshWorkoutObjects() {
+        countSetsLabel.text = "0"
+        setsSlider.value = 0
+        countRepsLabel.text = "0"
+        repsSlider.value = 0
+        countTimerLabel.text = "0 sec"
+        timerSlider.value = 0
+    }
+    
+    internal func refreshLabelsAndSliders() {
+        refreshWorkoutObjects()
     }
 }
 

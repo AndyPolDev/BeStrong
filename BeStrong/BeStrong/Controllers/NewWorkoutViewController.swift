@@ -1,5 +1,4 @@
 import UIKit
-import RealmSwift
 
 class NewWorkoutViewController: UIViewController {
     
@@ -61,8 +60,7 @@ class NewWorkoutViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    private let localRealm = try! Realm()
+
     private var workoutModel = WorkoutModel()
     
     private let testImage = UIImage(named: "biceps")
@@ -71,6 +69,8 @@ class NewWorkoutViewController: UIViewController {
         super.viewDidLoad()
         
         setViews()
+        setDelegate()
+        addRecognizers()
         setConstraints()
     }
     
@@ -92,13 +92,8 @@ class NewWorkoutViewController: UIViewController {
         view.addSubview(saveButton)
     }
     
-    @objc private func closeButtonPressed() {
-        dismiss(animated: true)
-    }
-    
-    @objc private func saveButtonPressed() {
-        setModel()
-        RealmManager.shared.saveWorkoutModel(model: workoutModel)
+    private func setDelegate() {
+        nameTextField.delegate = self
     }
     
     private func setModel() {
@@ -117,7 +112,59 @@ class NewWorkoutViewController: UIViewController {
         guard let imageData = testImage?.pngData() else { return }
         workoutModel.workoutImage = imageData
     }
+    
+    private func saveModel() {
+        guard let text = nameTextField.text else { return }
+        let count = text.filter { $0.isNumber || $0.isLetter }.count
+        
+        if count != 0 &&
+            workoutModel.workoutSets != 0 &&
+            (workoutModel.workoutReps != 0 || workoutModel.workoutTimer != 0) {
+            RealmManager.shared.saveWorkoutModel(model: workoutModel)
+            workoutModel = WorkoutModel()
+            alertOK(title: "Success", messoge: nil)
+            refreshObjects()
+        } else {
+            alertOK(title: "Error", messoge: "Please enter all parameters")
+        }
+    }
+    
+    private func addRecognizers() {
+        let tapScreen = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        swipeRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapScreen)
+        view.addGestureRecognizer(swipeRecognizer)
+    }
+    
+    private func refreshObjects() {
+        dateAndRepeatView.refreshDatePickerAndSwitch()
+        repsOrTimerView.refreshLabelsAndSliders()
+        nameTextField.text = ""
+    }
+    
+    @objc private func closeButtonPressed() {
+        dismiss(animated: true)
+    }
+    
+    @objc private func saveButtonPressed() {
+        setModel()
+        saveModel()
+    }
+    
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
+    }
 }
+
+//MARK: - UITextFieldDelegate
+
+extension NewWorkoutViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        nameTextField.resignFirstResponder()
+    }
+}
+
 
 //MARK: - Set Constraints
 

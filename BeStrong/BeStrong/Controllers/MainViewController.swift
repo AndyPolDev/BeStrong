@@ -1,7 +1,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    
     private let userPhoto: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = UIColor(rgb: 0xC2C2C2)
@@ -96,6 +96,7 @@ class MainViewController: UIViewController {
     private func setDelegates() {
         tableView.dataSource = self
         tableView.delegate = self
+        calendarView.cellCollectionViewDelegate = self
     }
     
     @objc private func addWorkoutButtonPressed() {
@@ -106,6 +107,16 @@ class MainViewController: UIViewController {
         
     }
 }
+
+//MARK: -
+
+extension MainViewController: SelectCollectionViewItemProtocol {
+    func selectItem(date: Date) {
+        print(date)
+    }
+}
+
+
 
 //MARK: - UICollectionViewDataSource
 

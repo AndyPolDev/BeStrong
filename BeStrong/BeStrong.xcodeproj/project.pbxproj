@@ -16,6 +16,7 @@
 		84723DFA28C3EED40097A316 /* RepsOrTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84723DF928C3EED40097A316 /* RepsOrTimerView.swift */; };
 		8474876328C76CFF00C122CC /* StartWorkoutWithTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474876228C76CFF00C122CC /* StartWorkoutWithTimerViewController.swift */; };
 		8474876628C78BF400C122CC /* DetailsWithTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474876528C78BF400C122CC /* DetailsWithTimerView.swift */; };
+		8474876928C7D22600C122CC /* OkAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474876828C7D22600C122CC /* OkAlert.swift */; };
 		847DE06328C69D5C009E83E2 /* StartWorkoutWithRepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DE06228C69D5C009E83E2 /* StartWorkoutWithRepsViewController.swift */; };
 		847DE06628C6A464009E83E2 /* DetailsWithRepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DE06528C6A464009E83E2 /* DetailsWithRepsView.swift */; };
 		848F30CE28B6C2E700BF1EFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F30CD28B6C2E700BF1EFF /* AppDelegate.swift */; };
@@ -50,6 +51,7 @@
 		84723DF928C3EED40097A316 /* RepsOrTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsOrTimerView.swift; sourceTree = "<group>"; };
 		8474876228C76CFF00C122CC /* StartWorkoutWithTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWorkoutWithTimerViewController.swift; sourceTree = "<group>"; };
 		8474876528C78BF400C122CC /* DetailsWithTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsWithTimerView.swift; sourceTree = "<group>"; };
+		8474876828C7D22600C122CC /* OkAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkAlert.swift; sourceTree = "<group>"; };
 		847DE06228C69D5C009E83E2 /* StartWorkoutWithRepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWorkoutWithRepsViewController.swift; sourceTree = "<group>"; };
 		847DE06528C6A464009E83E2 /* DetailsWithRepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsWithRepsView.swift; sourceTree = "<group>"; };
 		848F30CA28B6C2E700BF1EFF /* BeStrong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeStrong.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +120,14 @@
 				8474876528C78BF400C122CC /* DetailsWithTimerView.swift */,
 			);
 			path = StartWorkoutWithTimerVC;
+			sourceTree = "<group>";
+		};
+		8474876728C7D20900C122CC /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				8474876828C7D22600C122CC /* OkAlert.swift */,
+			);
+			path = Alerts;
 			sourceTree = "<group>";
 		};
 		847DE06428C6A31B009E83E2 /* StartWorkoutWithRepsVC */ = {
@@ -232,6 +242,7 @@
 		84C3748D28B8084300FEC230 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8474876728C7D20900C122CC /* Alerts */,
 				84C3748E28B8121200FEC230 /* MainVC */,
 				84717E5628BD435900737FA7 /* StatisticsVC */,
 				84723DF628C3C41A0097A316 /* NewWorkoutVC */,
@@ -352,6 +363,7 @@
 				8491F73628C26CF7007818E0 /* MainTabBarController.swift in Sources */,
 				848F30CE28B6C2E700BF1EFF /* AppDelegate.swift in Sources */,
 				84717E5928BD443100737FA7 /* ExercisesTableViewCell.swift in Sources */,
+				8474876928C7D22600C122CC /* OkAlert.swift in Sources */,
 				847DE06328C69D5C009E83E2 /* StartWorkoutWithRepsViewController.swift in Sources */,
 				84717E5528BD35F800737FA7 /* StatisticViewController.swift in Sources */,
 				84717E5128BCC06700737FA7 /* WorkoutTableViewCell.swift in Sources */,

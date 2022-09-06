@@ -2,7 +2,7 @@ import UIKit
 
 class CalendarCollectionViewCell: UICollectionViewCell {
     
-    let dayOfWeekLabel: UILabel = {
+    private let dayOfWeekLabel: UILabel = {
         let label = UILabel()
         label.text = "We"
         label.font = .robotoBold16()
@@ -13,7 +13,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let numberOfDayLabel: UILabel = {
+    private let numberOfDayLabel: UILabel = {
         let label = UILabel()
         label.text = "07"
         label.font = .robotoBold20()
@@ -54,6 +54,15 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         
         self.addSubview(dayOfWeekLabel)
         self.addSubview(numberOfDayLabel)
+    }
+    
+    private func cellConfigure(numberOfDay: String, dayOfWeek: String) {
+        numberOfDayLabel.text = numberOfDay
+        dayOfWeekLabel.text = dayOfWeek
+    }
+    
+    internal func dateForCell(numberOfDay: String, dayOfWeek: String) {
+        cellConfigure(numberOfDay: numberOfDay, dayOfWeek: dayOfWeek)
     }
     
     //MARK: - Set Constraints

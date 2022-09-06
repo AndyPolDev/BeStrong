@@ -77,8 +77,17 @@ class DateAndRepeatView: UIView {
         (datePicker.date, repeatSwitch.isOn)
     }
     
-    public func setDateAndRepeat() -> (Date, Bool) {
+    internal func setDateAndRepeat() -> (Date, Bool) {
         getDateAndReapete()
+    }
+    
+    private func refreshWorkoutObjects() {
+        datePicker.setDate(Date(), animated: true)
+        repeatSwitch.isOn = true
+    }
+    
+    internal func refreshDatePickerAndSwitch() {
+        refreshWorkoutObjects()
     }
 }
 
