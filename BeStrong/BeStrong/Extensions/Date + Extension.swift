@@ -33,7 +33,7 @@ extension Date {
         return weekday
     }
     
-    func offsetDays(days: Int) -> Date {
+    func offsetedDays(days: Int) -> Date {
         let offsetDate = Calendar.current.date(byAdding: .day, value: -days, to: self) ?? Date()
         return offsetDate
     }
