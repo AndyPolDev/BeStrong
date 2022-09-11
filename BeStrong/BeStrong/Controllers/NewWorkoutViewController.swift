@@ -101,9 +101,9 @@ class NewWorkoutViewController: UIViewController {
         workoutModel.workoutName = nameWorkout
         
         let dateFromPicker = dateAndRepeatView.setDateAndRepeat().0
-        workoutModel.workoutDate = dateFromPicker
+        workoutModel.workoutDate = dateFromPicker.localDate()
         workoutModel.workoutNumberOfDay = dateFromPicker.getWeekdayNumber()
-        workoutModel.workoutReteat = dateAndRepeatView.setDateAndRepeat().1
+        workoutModel.workoutRepeat = dateAndRepeatView.setDateAndRepeat().1
         
         workoutModel.workoutSets = repsOrTimerView.setSliderValue().0
         workoutModel.workoutReps = repsOrTimerView.setSliderValue().1
@@ -164,7 +164,6 @@ extension NewWorkoutViewController: UITextFieldDelegate {
         nameTextField.resignFirstResponder()
     }
 }
-
 
 //MARK: - Set Constraints
 
@@ -230,4 +229,3 @@ extension NewWorkoutViewController {
         ])
     }
 }
-

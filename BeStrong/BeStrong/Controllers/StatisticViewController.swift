@@ -1,4 +1,13 @@
 import UIKit
+import RealmSwift
+
+struct DifferenceWorkout {
+    let name: String
+    let lastReps: Int
+    let firstReps: Int
+    let lastTime: Int
+    let firstTime: Int
+}
 
 class StatisticViewController: UIViewController {
     
@@ -43,12 +52,25 @@ class StatisticViewController: UIViewController {
     
     private let idStatisticTableViewCell = "idStatisticTableViewCell"
     
+    private let localRealm = try! Realm()
+    private var workoutArray: Results<WorkoutModel>?
+    
+    private var differenceArray = [DifferenceWorkout]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setViews()
         setConstraints()
         setDelegates()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        differenceArray = [DifferenceWorkout]()
+        setStartScreen()
+        tableView.reloadData()
     }
     
     private func setViews() {
@@ -66,68 +88,119 @@ class StatisticViewController: UIViewController {
         tableView.delegate = self
     }
     
+    private func getWorkoutsName() -> [String] {
+        
+        var nameArray = [String]()
+        
+        let workoutArray = localRealm.objects(WorkoutModel.self)
+        
+        for workoutModel in workoutArray {
+            if !nameArray.contains(workoutModel.workoutName) {
+                nameArray.append(workoutModel.workoutName)
+            }
+        }
+        return nameArray
+    }
+    
+    private func getDifferenceModel(dateStart: Date) {
+        
+        let dateEnd = Date().localDate()
+        let nameArray = getWorkoutsName()
+        
+        for name in nameArray {
+            
+            let predicateDifference = NSPredicate(format: "workoutName = '\(name)' AND workoutDate BETWEEN %@", [dateStart, dateEnd])
+            workoutArray = localRealm.objects(WorkoutModel.self).filter(predicateDifference).sorted(byKeyPath: "workoutDate")
+            
+            guard let lastReps = workoutArray?.last?.workoutReps,
+                  let firstReps = workoutArray?.first?.workoutReps,
+                  let lastTime = workoutArray?.last?.workoutTimer,
+                  let firstTime = workoutArray?.first?.workoutTimer else {
+                return
+            }
+        
+            let differenceWorkout = DifferenceWorkout(name: name, lastReps: lastReps, firstReps: firstReps, lastTime: lastTime, firstTime: firstTime)
+            differenceArray.append(differenceWorkout)
+        }
+    }
+    
+    private func setStartScreen() {
+        let dateToday = Date().localDate()
+        getDifferenceModel(dateStart: dateToday.offsetDays(days: 7))
+        tableView.reloadData()
+    }
+    
     @objc private func segmentedChanged() {
+        let dateToday = Date().localDate()
+        differenceArray = [DifferenceWorkout]()
+    
         if segmentedControl.selectedSegmentIndex == 0 {
-            print("Week selected")
+            let dateStart = dateToday.offsetDays(days: 7)
+            getDifferenceModel(dateStart: dateStart)
         } else {
-            print("Month selected")
+            let dateStart = dateToday.offsetMonth(month: 1)
+            getDifferenceModel(dateStart: dateStart)
         }
+        tableView.reloadData()
     }
 }
-
-//MARK: - UICollectionViewDataSource
-
-extension StatisticViewController: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
+    //MARK: - UICollectionViewDataSource
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: idStatisticTableViewCell, for: indexPath) as? ExercisesTableViewCell else {
-            return UITableViewCell()
+    extension StatisticViewController: UITableViewDataSource {
+        
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            differenceArray.count
         }
         
-        return cell
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: idStatisticTableViewCell, for: indexPath) as? ExercisesTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            let differenceModel = differenceArray[indexPath.row]
+            cell.cellConfigure(differenseWorkout: differenceModel)
+            
+            return cell
+        }
     }
-}
-
-//MARK: - UITableViewDelegate
-
-extension StatisticViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        65
+    //MARK: - UITableViewDelegate
+    
+    extension StatisticViewController: UITableViewDelegate {
+        
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            65
+        }
     }
-}
-
-//MARK: - Set Constraints
-
-extension StatisticViewController {
-    private func setConstraints() {
-        
-        NSLayoutConstraint.activate([
-            mainLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            mainLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-        ])
-        
-        NSLayoutConstraint.activate([
-            segmentedControl.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 30),
-            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-        ])
-        
-        NSLayoutConstraint.activate([
-            exercisesLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10),
-            exercisesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            exercisesLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
-        
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: exercisesLabel.bottomAnchor, constant: 0),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
-        ])
+    
+    //MARK: - Set Constraints
+    
+    extension StatisticViewController {
+        private func setConstraints() {
+            
+            NSLayoutConstraint.activate([
+                mainLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+                mainLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            ])
+            
+            NSLayoutConstraint.activate([
+                segmentedControl.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 30),
+                segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            ])
+            
+            NSLayoutConstraint.activate([
+                exercisesLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10),
+                exercisesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                exercisesLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            ])
+            
+            NSLayoutConstraint.activate([
+                tableView.topAnchor.constraint(equalTo: exercisesLabel.bottomAnchor, constant: 0),
+                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+            ])
+        }
     }
-}

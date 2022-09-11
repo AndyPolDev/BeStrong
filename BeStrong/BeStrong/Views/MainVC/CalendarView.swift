@@ -61,10 +61,11 @@ extension CalendarView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idCalendarCell, for: indexPath) as? CalendarCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
-        //!!!Error with dayOfWeek!!!!
+    
         let dateTimeZone = Date().localDate()
+        
         let weekArray = dateTimeZone.getWeekArray()
+        
         cell.dateForCell(numberOfDay: weekArray[1][indexPath.item], dayOfWeek: weekArray[0][indexPath.item])
         
         if indexPath.item == 6 {
@@ -83,19 +84,19 @@ extension CalendarView: UICollectionViewDelegate {
         let dateTimeZone = Date()
         switch indexPath.item {
         case 0:
-            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetedDays(days: 6))
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 6))
         case 1:
-            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetedDays(days: 5))
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 5))
         case 2:
-            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetedDays(days: 4))
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 4))
         case 3:
-            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetedDays(days: 3))
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 3))
         case 4:
-            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetedDays(days: 2))
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 2))
         case 5:
-            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetedDays(days: 1))
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 1))
         default:
-            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetedDays(days: 0))
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 0))
         }
     }
 }

@@ -4,7 +4,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     private let dayOfWeekLabel: UILabel = {
         let label = UILabel()
-        label.text = "We"
+        label.text = "Wed"
         label.font = .robotoBold16()
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .white

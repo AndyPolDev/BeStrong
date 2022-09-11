@@ -1,5 +1,9 @@
 import UIKit
 
+protocol StartWorkoutProtocol: AnyObject {
+    func startButtonPressed(model: WorkoutModel)
+}
+
 class WorkoutTableViewCell: UITableViewCell {
     
     private let backgroundCell: UIView = {
@@ -21,7 +25,7 @@ class WorkoutTableViewCell: UITableViewCell {
     private let workoutImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "biceps")?.withRenderingMode(.alwaysTemplate)
+        //imageView.image = UIImage(named: "biceps")?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = .black
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -29,7 +33,7 @@ class WorkoutTableViewCell: UITableViewCell {
     
     private let workoutNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Pull Ups"
+        //label.text = "Pull Ups"
         label.textColor = .specialBlack
         label.font = .robotoMedium22()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +42,7 @@ class WorkoutTableViewCell: UITableViewCell {
     
     private let workoutRepsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Reps: 10"
+        //label.text = "Reps: 10"
         label.textColor = .specialGray
         label.font = .robotoMedium16()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -47,7 +51,7 @@ class WorkoutTableViewCell: UITableViewCell {
     
     private let workoutSetsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Sets: 2"
+        //label.text = "Sets: 2"
         label.textColor = .specialGray
         label.font = .robotoMedium16()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -58,9 +62,9 @@ class WorkoutTableViewCell: UITableViewCell {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 10
         button.addShadowOnView()
-        button.backgroundColor = .specialYellow
-        button.tintColor = .specialDarkGreen
-        button.setTitle("START", for: .normal)
+//        button.backgroundColor = .specialYellow
+//        button.tintColor = .specialDarkGreen
+//        button.setTitle("START", for: .normal)
         button.titleLabel?.font = .robotoBold16()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(startButtonPressed), for: .touchUpInside)
@@ -75,6 +79,10 @@ class WorkoutTableViewCell: UITableViewCell {
         setupViews()
         setConstraints()
     }
+    
+    var workoutModel = WorkoutModel()
+    
+    weak var cellStartWorkoutDelegate: StartWorkoutProtocol?
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -98,8 +106,47 @@ class WorkoutTableViewCell: UITableViewCell {
         
     }
     
+    private func configure(model: WorkoutModel) {
+        workoutModel = model
+        
+        workoutNameLabel.text = model.workoutName
+        
+        let (min, sec) = {(secs: Int) -> (Int, Int) in
+            return (secs / 60, secs % 60)}(model.workoutTimer)
+        
+        workoutRepsLabel.text = model.workoutTimer == 0 ? "Reps: \(model.workoutReps)" : "Timer: \(min) min \(sec)"
+        workoutSetsLabel.text = "Sets: \(model.workoutSets)"
+        
+        if model.workoutStatus {
+            startButton.setTitle("COMPLETE", for: .normal)
+            startButton.tintColor = .white
+            startButton.backgroundColor = .specialGreen
+            startButton.isEnabled = false
+        } else {
+            startButton.setTitle("START", for: .normal)
+            startButton.tintColor = .specialDarkGreen
+            startButton.backgroundColor = .specialYellow
+        }
+        
+        guard let imageData = model.workoutImage else { return }
+        guard let image = UIImage(data: imageData) else { return }
+        
+        workoutImageView.image = image.withRenderingMode(.alwaysTemplate)
+    }
+    
+    internal func cellConfigure(model: WorkoutModel) {
+        configure(model: model)
+    }
+    
     @objc private func startButtonPressed() {
-        print("Button pressed")
+        
+        //workoutModel.workoutStatus = true
+        cellStartWorkoutDelegate?.startButtonPressed(model: workoutModel)
+        
+//        startButton.setTitle("COMPLETE", for: .normal)
+//        startButton.tintColor = .white
+//        startButton.backgroundColor = .specialGreen
+//        startButton.isEnabled = false
     }
 }
 
