@@ -19,4 +19,17 @@ class RealmManager {
             localRealm.delete(model)
         }
     }
+    
+    func updateSetsRepsWorkoutModel(model: WorkoutModel, sets: Int, reps: Int) {
+        try! localRealm.write{
+            model.workoutSets = sets
+            model.workoutReps = reps
+        }
+    }
+    
+    func updateStatusWorkoutModel(model: WorkoutModel, bool: Bool = true) {
+        try! localRealm.write{
+            model.workoutStatus = bool
+        }
+    }
 }

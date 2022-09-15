@@ -41,6 +41,7 @@ class StartWorkoutWithTimerViewController: UIViewController {
         super.viewDidLoad()
         
         setViews()
+        setDelegates()
         setConstraints()
     }
     
@@ -59,12 +60,26 @@ class StartWorkoutWithTimerViewController: UIViewController {
         view.addSubview(finishButton)
     }
     
+    private func setDelegates() {
+        detailsView.detailsWithTimerViewDelegate = self
+    }
+    
     @objc private func closeButtonPressed() {
-        print("Close button pressed")
+        dismiss(animated: true)
     }
     
     @objc private func finishButtonPressed() {
         print("Finish button pressed")
+    }
+}
+
+extension StartWorkoutWithTimerViewController: DetailViewDelegate {
+    func editingButtonPressed() {
+        print("editingButtonPressed")
+    }
+    
+    func nextButtonPressed() {
+        print("nextButtonPressed")
     }
 }
 

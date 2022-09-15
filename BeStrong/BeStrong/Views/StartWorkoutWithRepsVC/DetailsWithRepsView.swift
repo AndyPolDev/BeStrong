@@ -1,12 +1,17 @@
 import UIKit
 
+protocol DetailViewDelegate : AnyObject {
+    func editingButtonPressed()
+    func nextButtonPressed()
+}
+
 class DetailsWithRepsView: UIView {
     
-    private let workoutName = UILabel(text: "Biceps", font: .robotoMedium24(), textColor: .specialGray)
+    let workoutNameLabel = UILabel(text: "Biceps", font: .robotoMedium24(), textColor: .specialGray)
     
     private let setsLabel = UILabel(text: "Sets", font: .robotoMedium18(), textColor: .specialGray)
     
-    private let setsProgressLabel = UILabel(text: "1/4", font: .robotoMedium24(), textColor: .specialGray)
+    let setsProgressLabel = UILabel(text: "1/4", font: .robotoMedium24(), textColor: .specialGray)
     
     private let firstSeparatingView: UIView = {
         let view = UIView()
@@ -17,7 +22,7 @@ class DetailsWithRepsView: UIView {
     
     private let repsLabel = UILabel(text: "Reps", font: .robotoMedium18(), textColor: .specialGray)
     
-    private let repsProgressLabel = UILabel(text: "20", font: .robotoMedium24(), textColor: .specialGray)
+    let repsProgressLabel = UILabel(text: "20", font: .robotoMedium24(), textColor: .specialGray)
     
     private let secondSeparatingView: UIView = {
         let view = UIView()
@@ -54,6 +59,8 @@ class DetailsWithRepsView: UIView {
     private var firstLineStackView = UIStackView()
     private var secondLineStackView = UIStackView()
     
+    weak var detailsWithRepsViewDelegate: DetailViewDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -70,7 +77,7 @@ class DetailsWithRepsView: UIView {
         layer.cornerRadius = 10
         translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(workoutName)
+        addSubview(workoutNameLabel)
         firstLineStackView = UIStackView(arrangedSubviews: [setsLabel,
                                                             setsProgressLabel],
                                          axis: .horizontal,
@@ -91,14 +98,13 @@ class DetailsWithRepsView: UIView {
     }
     
     @objc private func editingButtonPressed() {
-        print("EditingButtonPressed")
+        detailsWithRepsViewDelegate?.editingButtonPressed()
     }
     
     
     @objc private func nextSetButtonPressed() {
-        print("NextSetButtonPressed")
+        detailsWithRepsViewDelegate?.nextButtonPressed()
     }
-    
     
 }
 
@@ -108,12 +114,12 @@ extension DetailsWithRepsView {
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
-            workoutName.centerXAnchor.constraint(equalTo: centerXAnchor),
-            workoutName.topAnchor.constraint(equalTo: topAnchor, constant: 10)
+            workoutNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            workoutNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10)
         ])
 
         NSLayoutConstraint.activate([
-            firstLineStackView.topAnchor.constraint(equalTo: workoutName.bottomAnchor, constant: 15),
+            firstLineStackView.topAnchor.constraint(equalTo: workoutNameLabel.bottomAnchor, constant: 15),
             firstLineStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             firstLineStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
         ])

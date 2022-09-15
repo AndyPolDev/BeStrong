@@ -54,6 +54,8 @@ class DetailsWithTimerView: UIView {
     private var firstLineStackView = UIStackView()
     private var secondLineStackView = UIStackView()
     
+    weak var detailsWithTimerViewDelegate: DetailViewDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -91,12 +93,12 @@ class DetailsWithTimerView: UIView {
     }
     
     @objc private func editingButtonPressed() {
-        print("EditingButtonPressed")
+        detailsWithTimerViewDelegate?.editingButtonPressed()
     }
     
     
     @objc private func nextSetButtonPressed() {
-        print("NextSetButtonPressed")
+        detailsWithTimerViewDelegate?.nextButtonPressed()
     }
 }
 

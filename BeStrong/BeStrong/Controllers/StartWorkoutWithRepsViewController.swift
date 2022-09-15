@@ -37,15 +37,27 @@ class StartWorkoutWithRepsViewController: UIViewController {
         return button
     }()
     
+    var workoutModel = WorkoutModel()
+    let customAlert = CustomAlert()
+    
+    private var numberOfSet = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setViews()
+        setDelegates()
         setConstraints()
     }
     
     override func viewDidLayoutSubviews() {
         closeButton.layer.cornerRadius = closeButton.frame.width / 2
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        configureWorkoutParameters()
     }
     
     private func setViews() {
@@ -59,12 +71,58 @@ class StartWorkoutWithRepsViewController: UIViewController {
         view.addSubview(finishButton)
     }
     
+    private func setDelegates() {
+        detailsView.detailsWithRepsViewDelegate = self
+    }
+    
+    private func configureWorkoutParameters() {
+        detailsView.workoutNameLabel.text = workoutModel.workoutName
+        detailsView.setsProgressLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"
+        detailsView.repsProgressLabel.text = String(workoutModel.workoutReps)
+        
+    }
+    
     @objc private func closeButtonPressed() {
-        print("Close button pressed")
+        dismiss(animated: true)
     }
     
     @objc private func finishButtonPressed() {
-        print("Finish button pressed")
+        if numberOfSet == workoutModel.workoutSets {
+            dismiss(animated: true)
+            RealmManager.shared.updateStatusWorkoutModel(model: workoutModel)
+        } else {
+            alertOkCancel(title: "Warning", messoge: "You haven't finished your workout") {
+                self.dismiss(animated: true)
+            }
+        }
+    }
+}
+
+//MARK: - Set DetailViewDelegate
+
+extension StartWorkoutWithRepsViewController: DetailViewDelegate {
+    func editingButtonPressed() {
+        customAlert.alertCustom(viewController: self, repsOrTimer: "Reps") { [self] sets, reps in
+            if sets != "" && reps != "" {
+                self.detailsView.setsProgressLabel.text = "\(String(describing: self.numberOfSet))/\(sets)"
+                self.detailsView.repsProgressLabel.text = reps
+                
+                guard let numberOfSets = Int(sets),
+                      let numberOfReps = Int(reps) else { return }
+                RealmManager.shared.updateSetsRepsWorkoutModel(model: workoutModel,
+                                                               sets: numberOfSets,
+                                                               reps: numberOfReps)
+            }
+        }
+    }
+    
+    func nextButtonPressed() {
+        if numberOfSet < workoutModel.workoutSets {
+            numberOfSet += 1
+            detailsView.setsProgressLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"
+        } else {
+            alertOK(title: "Error", messoge: "Finish your workout")
+        }
     }
 }
 
@@ -77,7 +135,7 @@ extension StartWorkoutWithRepsViewController {
             startWorkoutLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             startWorkoutLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-
+        
         NSLayoutConstraint.activate([
             closeButton.centerYAnchor.constraint(equalTo: startWorkoutLabel.centerYAnchor),
             closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -91,7 +149,7 @@ extension StartWorkoutWithRepsViewController {
             ladyWorkoutImageView.widthAnchor.constraint(equalToConstant: 190),
             ladyWorkoutImageView.heightAnchor.constraint(equalToConstant: 250)
         ])
-
+        
         NSLayoutConstraint.activate([
             detailsLabel.topAnchor.constraint(equalTo: ladyWorkoutImageView.bottomAnchor, constant: 25),
             detailsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
@@ -104,7 +162,7 @@ extension StartWorkoutWithRepsViewController {
             detailsView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             detailsView.heightAnchor.constraint(equalToConstant: 235)
         ])
-    
+        
         NSLayoutConstraint.activate([
             finishButton.topAnchor.constraint(equalTo: detailsView.bottomAnchor, constant: 25),
             finishButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),

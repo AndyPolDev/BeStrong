@@ -19,6 +19,7 @@
 		8474876928C7D22600C122CC /* OkAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474876828C7D22600C122CC /* OkAlert.swift */; };
 		847DE06328C69D5C009E83E2 /* StartWorkoutWithRepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DE06228C69D5C009E83E2 /* StartWorkoutWithRepsViewController.swift */; };
 		847DE06628C6A464009E83E2 /* DetailsWithRepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DE06528C6A464009E83E2 /* DetailsWithRepsView.swift */; };
+		8480A5D228D3C7260096085C /* OkCancelAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8480A5D128D3C7260096085C /* OkCancelAlert.swift */; };
 		848F30CE28B6C2E700BF1EFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F30CD28B6C2E700BF1EFF /* AppDelegate.swift */; };
 		848F30D028B6C2E700BF1EFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F30CF28B6C2E700BF1EFF /* SceneDelegate.swift */; };
 		848F30D228B6C2E700BF1EFF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F30D128B6C2E700BF1EFF /* MainViewController.swift */; };
@@ -27,6 +28,8 @@
 		8491F73628C26CF7007818E0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491F73528C26CF7007818E0 /* MainTabBarController.swift */; };
 		8491F73828C27606007818E0 /* NewWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491F73728C27606007818E0 /* NewWorkoutViewController.swift */; };
 		84AC491528BB587900C73C65 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC491428BB587900C73C65 /* CalendarCollectionViewCell.swift */; };
+		84B93A2C28D11C7B0026F175 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B93A2B28D11C7B0026F175 /* CustomAlert.swift */; };
+		84B93A2E28D11CA90026F175 /* DifferenceWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B93A2D28D11CA90026F175 /* DifferenceWorkout.swift */; };
 		84BE16CF28BA9F2A001BC967 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84BE16CD28BA9F2A001BC967 /* Roboto-Medium.ttf */; };
 		84BE16D028BA9F2A001BC967 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84BE16CE28BA9F2A001BC967 /* Roboto-Bold.ttf */; };
 		84BE16D228BAA04E001BC967 /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE16D128BAA04E001BC967 /* UIView + Extension.swift */; };
@@ -56,6 +59,7 @@
 		8474876828C7D22600C122CC /* OkAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkAlert.swift; sourceTree = "<group>"; };
 		847DE06228C69D5C009E83E2 /* StartWorkoutWithRepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWorkoutWithRepsViewController.swift; sourceTree = "<group>"; };
 		847DE06528C6A464009E83E2 /* DetailsWithRepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsWithRepsView.swift; sourceTree = "<group>"; };
+		8480A5D128D3C7260096085C /* OkCancelAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkCancelAlert.swift; sourceTree = "<group>"; };
 		848F30CA28B6C2E700BF1EFF /* BeStrong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeStrong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848F30CD28B6C2E700BF1EFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		848F30CF28B6C2E700BF1EFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +70,8 @@
 		8491F73528C26CF7007818E0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		8491F73728C27606007818E0 /* NewWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkoutViewController.swift; sourceTree = "<group>"; };
 		84AC491428BB587900C73C65 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		84B93A2B28D11C7B0026F175 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		84B93A2D28D11CA90026F175 /* DifferenceWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceWorkout.swift; sourceTree = "<group>"; };
 		84BE16CD28BA9F2A001BC967 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		84BE16CE28BA9F2A001BC967 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		84BE16D128BAA04E001BC967 /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
@@ -130,6 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				8474876828C7D22600C122CC /* OkAlert.swift */,
+				8480A5D128D3C7260096085C /* OkCancelAlert.swift */,
+				84B93A2B28D11C7B0026F175 /* CustomAlert.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -241,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				84E9338A28C4EAA2002BAAD4 /* WorkoutModel.swift */,
+				84B93A2D28D11CA90026F175 /* DifferenceWorkout.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -381,11 +390,14 @@
 				84F025C628C8D66900279F43 /* UITextField + Extension.swift in Sources */,
 				84717E5328BCC7B200737FA7 /* UIStackView + Extension.swift in Sources */,
 				84BE16D228BAA04E001BC967 /* UIView + Extension.swift in Sources */,
+				84B93A2C28D11C7B0026F175 /* CustomAlert.swift in Sources */,
 				84717E5B28BD55BB00737FA7 /* UILabel + Extension.swift in Sources */,
 				84AC491528BB587900C73C65 /* CalendarCollectionViewCell.swift in Sources */,
+				8480A5D228D3C7260096085C /* OkCancelAlert.swift in Sources */,
 				8491F73828C27606007818E0 /* NewWorkoutViewController.swift in Sources */,
 				847DE06628C6A464009E83E2 /* DetailsWithRepsView.swift in Sources */,
 				84C3749028B8122400FEC230 /* CalendarView.swift in Sources */,
+				84B93A2E28D11CA90026F175 /* DifferenceWorkout.swift in Sources */,
 				848F30D028B6C2E700BF1EFF /* SceneDelegate.swift in Sources */,
 				84E9338E28C4EDEA002BAAD4 /* RealmManager.swift in Sources */,
 				84723DF828C3C4A30097A316 /* DateAndRepeatView.swift in Sources */,

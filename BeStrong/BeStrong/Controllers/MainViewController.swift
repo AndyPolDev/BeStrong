@@ -169,7 +169,16 @@ extension MainViewController: SelectCollectionViewItemProtocol {
 
 extension MainViewController: StartWorkoutProtocol {
     func startButtonPressed(model: WorkoutModel) {
-        print(model)
+        if model.workoutReps != 0 {
+            let startWorkoutWithRepsViewController = StartWorkoutWithRepsViewController()
+            startWorkoutWithRepsViewController.modalPresentationStyle = .fullScreen
+            startWorkoutWithRepsViewController.workoutModel = model
+            present(startWorkoutWithRepsViewController, animated: true)
+        } else {
+            let startWorkoutWithTimerViewController = StartWorkoutWithTimerViewController()
+            startWorkoutWithTimerViewController.modalPresentationStyle = .fullScreen
+            present(startWorkoutWithTimerViewController, animated: true)
+        }
     }
 }
 

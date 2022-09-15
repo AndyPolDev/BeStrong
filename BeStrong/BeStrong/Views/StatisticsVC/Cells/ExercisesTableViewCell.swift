@@ -4,7 +4,7 @@ class ExercisesTableViewCell: UITableViewCell {
     
     private let exerciseLabel: UILabel = {
         let label = UILabel()
-        label.text = "Biceps"
+        //label.text = "Biceps"
         label.textColor = .specialGray
         label.font = .robotoBold24()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -17,7 +17,7 @@ class ExercisesTableViewCell: UITableViewCell {
     
     private let progressLabel: UILabel = {
         let label = UILabel()
-        label.text = "+2"
+        //label.text = "+2"
         label.textColor = .specialGreen
         label.font = .robotoBold24()
         label.translatesAutoresizingMaskIntoConstraints = false

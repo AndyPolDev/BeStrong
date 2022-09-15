@@ -73,16 +73,16 @@ class WorkoutTableViewCell: UITableViewCell {
     
     private var labelStackView = UIStackView()
     
+    var workoutModel = WorkoutModel()
+    
+    weak var cellStartWorkoutDelegate: StartWorkoutProtocol?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupViews()
         setConstraints()
     }
-    
-    var workoutModel = WorkoutModel()
-    
-    weak var cellStartWorkoutDelegate: StartWorkoutProtocol?
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -139,14 +139,9 @@ class WorkoutTableViewCell: UITableViewCell {
     }
     
     @objc private func startButtonPressed() {
-        
-        //workoutModel.workoutStatus = true
+
         cellStartWorkoutDelegate?.startButtonPressed(model: workoutModel)
         
-//        startButton.setTitle("COMPLETE", for: .normal)
-//        startButton.tintColor = .white
-//        startButton.backgroundColor = .specialGreen
-//        startButton.isEnabled = false
     }
 }
 

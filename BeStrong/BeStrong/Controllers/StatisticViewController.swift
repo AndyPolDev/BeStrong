@@ -1,13 +1,7 @@
 import UIKit
 import RealmSwift
 
-struct DifferenceWorkout {
-    let name: String
-    let lastReps: Int
-    let firstReps: Int
-    let lastTime: Int
-    let firstTime: Int
-}
+
 
 class StatisticViewController: UIViewController {
     
