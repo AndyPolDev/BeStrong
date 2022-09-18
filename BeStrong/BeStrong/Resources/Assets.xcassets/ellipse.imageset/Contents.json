@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "CircularBar.png",
+      "filename" : "ellipse.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "CircularBar@2x.png",
+      "filename" : "ellipse@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "CircularBar@3x.png",
+      "filename" : "ellipse@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -91,7 +91,8 @@ class StartWorkoutWithRepsViewController: UIViewController {
             dismiss(animated: true)
             RealmManager.shared.updateStatusWorkoutModel(model: workoutModel)
         } else {
-            alertOkCancel(title: "Warning", messoge: "You haven't finished your workout") {
+            alertOkCancel(title: "Warning",
+                          message: "You haven't finished your workout") {
                 self.dismiss(animated: true)
             }
         }
@@ -104,11 +105,12 @@ extension StartWorkoutWithRepsViewController: DetailViewDelegate {
     func editingButtonPressed() {
         customAlert.alertCustom(viewController: self, repsOrTimer: "Reps") { [self] sets, reps in
             if sets != "" && reps != "" {
-                self.detailsView.setsProgressLabel.text = "\(String(describing: self.numberOfSet))/\(sets)"
-                self.detailsView.repsProgressLabel.text = reps
-                
                 guard let numberOfSets = Int(sets),
                       let numberOfReps = Int(reps) else { return }
+                
+                detailsView.setsProgressLabel.text = "\(String(describing: numberOfSet))/\(sets)"
+                detailsView.repsProgressLabel.text = reps
+            
                 RealmManager.shared.updateSetsRepsWorkoutModel(model: workoutModel,
                                                                sets: numberOfSets,
                                                                reps: numberOfReps)

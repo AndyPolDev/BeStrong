@@ -177,6 +177,7 @@ extension MainViewController: StartWorkoutProtocol {
         } else {
             let startWorkoutWithTimerViewController = StartWorkoutWithTimerViewController()
             startWorkoutWithTimerViewController.modalPresentationStyle = .fullScreen
+            startWorkoutWithTimerViewController.workoutModel = model
             present(startWorkoutWithTimerViewController, animated: true)
         }
     }

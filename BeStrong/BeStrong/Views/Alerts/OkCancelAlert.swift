@@ -1,10 +1,10 @@
 import UIKit
 
 extension UIViewController {
-    func alertOkCancel(title: String, messoge: String?, completionHandler: @escaping () -> Void) {
+    func alertOkCancel(title: String, message: String?, completionHandler: @escaping () -> Void) {
         
         let alertController = UIAlertController(title: title,
-                                                message: messoge,
+                                                message: message,
                                                 preferredStyle: .alert)
         let okButton = UIAlertAction(title: "OK", style: .default) { _ in
             completionHandler()

@@ -27,6 +27,7 @@
 		848F30DA28B6C2E800BF1EFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848F30D828B6C2E800BF1EFF /* LaunchScreen.storyboard */; };
 		8491F73628C26CF7007818E0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491F73528C26CF7007818E0 /* MainTabBarController.swift */; };
 		8491F73828C27606007818E0 /* NewWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491F73728C27606007818E0 /* NewWorkoutViewController.swift */; };
+		84A2C27728D5196400AEB6D5 /* Int + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A2C27628D5196400AEB6D5 /* Int + Extensions.swift */; };
 		84AC491528BB587900C73C65 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC491428BB587900C73C65 /* CalendarCollectionViewCell.swift */; };
 		84B93A2C28D11C7B0026F175 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B93A2B28D11C7B0026F175 /* CustomAlert.swift */; };
 		84B93A2E28D11CA90026F175 /* DifferenceWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B93A2D28D11CA90026F175 /* DifferenceWorkout.swift */; };
@@ -69,6 +70,7 @@
 		848F30DB28B6C2E800BF1EFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8491F73528C26CF7007818E0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		8491F73728C27606007818E0 /* NewWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkoutViewController.swift; sourceTree = "<group>"; };
+		84A2C27628D5196400AEB6D5 /* Int + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + Extensions.swift"; sourceTree = "<group>"; };
 		84AC491428BB587900C73C65 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		84B93A2B28D11C7B0026F175 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		84B93A2D28D11CA90026F175 /* DifferenceWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceWorkout.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 			children = (
 				84BE16CB28BA9EE4001BC967 /* UIKit */,
 				84E9338F28C4FA8B002BAAD4 /* Date + Extension.swift */,
+				84A2C27628D5196400AEB6D5 /* Int + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				84AC491528BB587900C73C65 /* CalendarCollectionViewCell.swift in Sources */,
 				8480A5D228D3C7260096085C /* OkCancelAlert.swift in Sources */,
 				8491F73828C27606007818E0 /* NewWorkoutViewController.swift in Sources */,
+				84A2C27728D5196400AEB6D5 /* Int + Extensions.swift in Sources */,
 				847DE06628C6A464009E83E2 /* DetailsWithRepsView.swift in Sources */,
 				84C3749028B8122400FEC230 /* CalendarView.swift in Sources */,
 				84B93A2E28D11CA90026F175 /* DifferenceWorkout.swift in Sources */,

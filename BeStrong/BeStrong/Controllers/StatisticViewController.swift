@@ -1,8 +1,6 @@
 import UIKit
 import RealmSwift
 
-
-
 class StatisticViewController: UIViewController {
     
     private let mainLabel: UILabel = {

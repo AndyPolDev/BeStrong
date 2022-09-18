@@ -2,11 +2,11 @@ import UIKit
 
 class DetailsWithTimerView: UIView {
     
-    private let workoutName = UILabel(text: "Squats", font: .robotoMedium24(), textColor: .specialGray)
+    let workoutName = UILabel(text: "Squats", font: .robotoMedium24(), textColor: .specialGray)
     
     private let setsLabel = UILabel(text: "Sets", font: .robotoMedium18(), textColor: .specialGray)
     
-    private let setsProgressLabel = UILabel(text: "1/4", font: .robotoMedium24(), textColor: .specialGray)
+    let setsProgressLabel = UILabel(text: "1/4", font: .robotoMedium24(), textColor: .specialGray)
     
     private let firstSeparatingView: UIView = {
         let view = UIView()
@@ -17,7 +17,7 @@ class DetailsWithTimerView: UIView {
     
     private let timerLabel = UILabel(text: "Time of Set", font: .robotoMedium18(), textColor: .specialGray)
     
-    private let timerProgressLabel = UILabel(text: "1 min 30 sec", font: .robotoMedium24(), textColor: .specialGray)
+    let timerProgressLabel = UILabel(text: "1 min 30 sec", font: .robotoMedium24(), textColor: .specialGray)
     
     private let secondSeparatingView: UIView = {
         let view = UIView()
@@ -26,7 +26,7 @@ class DetailsWithTimerView: UIView {
         return view
     }()
     
-    private lazy var editingButton: UIButton = {
+    lazy var editingButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .clear
         button.setTitle("Editing", for: .normal)
@@ -38,7 +38,7 @@ class DetailsWithTimerView: UIView {
         return button
     }()
     
-    private lazy var nextSetButton: UIButton = {
+    lazy var nextSetButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .specialYellow
         button.layer.cornerRadius = 10
@@ -80,7 +80,7 @@ class DetailsWithTimerView: UIView {
         firstLineStackView.distribution = .equalSpacing
         addSubview(firstLineStackView)
         addSubview(firstSeparatingView)
-    
+        
         secondLineStackView = UIStackView(arrangedSubviews: [timerLabel,
                                                              timerProgressLabel],
                                           axis: .horizontal,
@@ -111,26 +111,26 @@ extension DetailsWithTimerView {
             workoutName.centerXAnchor.constraint(equalTo: centerXAnchor),
             workoutName.topAnchor.constraint(equalTo: topAnchor, constant: 10)
         ])
-
+        
         NSLayoutConstraint.activate([
             firstLineStackView.topAnchor.constraint(equalTo: workoutName.bottomAnchor, constant: 15),
             firstLineStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             firstLineStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
         ])
-
+        
         NSLayoutConstraint.activate([
             firstSeparatingView.topAnchor.constraint(equalTo: firstLineStackView.bottomAnchor, constant: 3),
             firstSeparatingView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             firstSeparatingView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             firstSeparatingView.heightAnchor.constraint(equalToConstant: 1)
         ])
-
+        
         NSLayoutConstraint.activate([
             secondLineStackView.topAnchor.constraint(equalTo: firstSeparatingView.bottomAnchor, constant: 15),
             secondLineStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             secondLineStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
         ])
-
+        
         NSLayoutConstraint.activate([
             secondSeparatingView.topAnchor.constraint(equalTo: secondLineStackView.bottomAnchor, constant: 3),
             secondSeparatingView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
@@ -144,7 +144,7 @@ extension DetailsWithTimerView {
             editingButton.heightAnchor.constraint(equalToConstant: 25),
             editingButton.widthAnchor.constraint(equalToConstant: 75)
         ])
-
+        
         NSLayoutConstraint.activate([
             nextSetButton.topAnchor.constraint(equalTo: editingButton.bottomAnchor, constant: 10),
             nextSetButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
