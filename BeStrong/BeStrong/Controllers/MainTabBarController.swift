@@ -20,7 +20,7 @@ class MainTabBarController: UITabBarController {
     private func setupViews() {
         let mainViewController = MainViewController()
         let statisticViewController = StatisticViewController()
-        let profileViewCotroller = EditingProfileViewController()
+        let profileViewCotroller = ProfileViewController()
         
         setViewControllers([mainViewController, statisticViewController, profileViewCotroller], animated: true)
         

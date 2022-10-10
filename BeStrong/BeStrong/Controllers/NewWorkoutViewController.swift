@@ -15,7 +15,6 @@ class NewWorkoutViewController: UIViewController {
     private lazy var closeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(named: "closeButton"), for: .normal)
-        //
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(closeButtonPressed), for: .touchUpInside)
         return button
