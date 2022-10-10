@@ -98,8 +98,10 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func editingButtonPressed() {
-        print("Editing button pressed")
-        
+        let newWorkoutViewController = EditingProfileViewController()
+        newWorkoutViewController.modalPresentationStyle = .fullScreen
+        newWorkoutViewController.modalTransitionStyle = .coverVertical
+        present(newWorkoutViewController, animated: true)
     }
 }
 

@@ -1,15 +1,26 @@
 import UIKit
-import CoreData
+import RealmSwift
 
 class EditingProfileViewController: UIViewController {
     
     private let editingProfileLabel = UILabel(text: "EDITING PROFILE", font: .robotoMedium24(), textColor: .specialGray)
+    
+    private lazy var closeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(named: "closeButton"), for: .normal)
+        //
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(closeButtonPressed), for: .touchUpInside)
+        return button
+    }()
     
     private let userPhoto: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = UIColor(rgb: 0xC2C2C2)
         imageView.layer.borderWidth = 5
         imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.image = UIImage(named: "addUser")
+        imageView.contentMode = .center
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -18,7 +29,6 @@ class EditingProfileViewController: UIViewController {
     private lazy var addUserPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .clear
-        button.setImage(UIImage(named: "addUser"), for: .normal)
         button.tintColor = .white
         //
         button.layer.masksToBounds = true
@@ -47,6 +57,9 @@ class EditingProfileViewController: UIViewController {
     private let weightLabel = UILabel(text: "Weight")
     private let weightTextField = UITextField.createSimpleTextField()
     
+    private let targetLabel = UILabel(text: "Target")
+    private let targetTextField = UITextField.createSimpleTextField()
+    
     private lazy var saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .specialGreen
@@ -58,7 +71,11 @@ class EditingProfileViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-
+    
+    private let localRealm = try! Realm()
+    private var userArray: Results<UserModel>!
+    private var userModel = UserModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,6 +83,10 @@ class EditingProfileViewController: UIViewController {
         setDelegates()
         addRecognizers()
         setConstraints()
+        
+        userArray = localRealm.objects(UserModel.self)
+        
+        loadUserInfo()
     }
     
     override func viewDidLayoutSubviews() {
@@ -79,6 +100,7 @@ class EditingProfileViewController: UIViewController {
         view.backgroundColor = .specialBackground
         
         view.addSubview(editingProfileLabel)
+        view.addSubview(closeButton)
         view.addSubview(userPhotoBackgroundView)
         view.addSubview(userPhoto)
         view.addSubview(addUserPhotoButton)
@@ -90,6 +112,8 @@ class EditingProfileViewController: UIViewController {
         view.addSubview(heightTextField)
         view.addSubview(weightLabel)
         view.addSubview(weightTextField)
+        view.addSubview(targetLabel)
+        view.addSubview(targetTextField)
         view.addSubview(saveButton)
     }
     
@@ -108,18 +132,97 @@ class EditingProfileViewController: UIViewController {
         view.addGestureRecognizer(swipeRecognizer)
     }
     
+    private func setUserModel() {
+        guard let firstName = firstNameTextField.text,
+              let secondName = secondNameTextField.text,
+              let userHeight = heightTextField.text,
+              let userWeight = weightTextField.text,
+              let userTarget = targetTextField.text else { return }
+        
+        guard let intUserHeight = Int(userHeight),
+              let intUserWeight = Int(userWeight),
+              let intUserTarget = Int(userTarget) else { return }
+        
+        userModel.userFirstName = firstName
+        userModel.userSecondName = secondName
+        userModel.userHeight = intUserHeight
+        userModel.userWeight = intUserWeight
+        userModel.userTarget = intUserTarget
+        
+        if userPhoto.image == UIImage(named: "addUser") {
+            userModel.userImage = nil
+        } else {
+            guard let imageData = userPhoto.image?.pngData() else { return }
+            userModel.userImage = imageData
+        }
+    }
+    
+    private func loadUserInfo() {
+        if userArray.count != 0, userArray[0].userFirstName != "Unknown" {
+            firstNameTextField.text = userArray[0].userFirstName
+            secondNameTextField.text = userArray[0].userSecondName
+            heightTextField.text = String(userArray[0].userHeight)
+            weightTextField.text = String(userArray[0].userWeight)
+            targetTextField.text = String(userArray[0].userTarget)
+            
+            guard let imageData = userArray[0].userImage else { return }
+            guard let userImage = UIImage(data: imageData) else { return }
+            userPhoto.image = userImage
+            userPhoto.contentMode = .scaleAspectFit
+        }
+    }
+    
     @objc private func hideKeyboard() {
         view.endEditing(true)
     }
     
+    @objc private func closeButtonPressed() {
+        dismiss(animated: true)
+    }
+    
     @objc private func addUserPhotoButtonPressed() {
-        print("addUserPhotoButtonPressed")
+        alertGalleryOrCamera { [weak self] source in
+            guard let self else { return }
+            self.chooseImagePicker(source: source)
+        }
     }
     
     @objc private func saveButtonPressed() {
-        print("saveButtonPressed")
+        setUserModel()
+        
+        if userArray.count == 0 {
+            RealmManager.shared.saveUserModel(model: userModel)
+        } else {
+            RealmManager.shared.updateUserModel(model: userModel)
+        }
+        userModel = UserModel()
+        dismiss(animated: true)
     }
 }
+
+//MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+
+extension EditingProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func chooseImagePicker(source: UIImagePickerController.SourceType) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(source) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = source
+            present(imagePicker, animated: true)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.editedImage] as? UIImage
+        userPhoto.image = image
+        userPhoto.contentMode = .scaleAspectFit
+        dismiss(animated: true)
+    }
+}
+
 
 //MARK: - UITextFieldDelegate
 
@@ -136,7 +239,15 @@ extension EditingProfileViewController {
     private func setConstraints() {
         NSLayoutConstraint.activate([
             editingProfileLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            editingProfileLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            editingProfileLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            editingProfileLabel.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        
+        NSLayoutConstraint.activate([
+            closeButton.centerYAnchor.constraint(equalTo: editingProfileLabel.centerYAnchor),
+            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            closeButton.heightAnchor.constraint(equalToConstant: 30),
+            closeButton.widthAnchor.constraint(equalToConstant: 30)
         ])
         
         NSLayoutConstraint.activate([
@@ -213,7 +324,20 @@ extension EditingProfileViewController {
         ])
         
         NSLayoutConstraint.activate([
-            saveButton.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 40),
+            targetLabel.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 15),
+            targetLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            targetLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+        ])
+        
+        NSLayoutConstraint.activate([
+            targetTextField.topAnchor.constraint(equalTo: targetLabel.bottomAnchor, constant: 3),
+            targetTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            targetTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            targetTextField.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        NSLayoutConstraint.activate([
+            saveButton.topAnchor.constraint(equalTo: targetTextField.bottomAnchor, constant: 40),
             saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             saveButton.heightAnchor.constraint(equalToConstant: 55)

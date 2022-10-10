@@ -49,6 +49,8 @@
 		A18DD59D28F050E300920596 /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18DD59C28F050E300920596 /* ProgressCollectionViewCell.swift */; };
 		A18DD59F28F053FF00920596 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18DD59E28F053FF00920596 /* ProgressView.swift */; };
 		A18DD5A328F0861500920596 /* PF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18DD5A228F0861500920596 /* PF.swift */; };
+		A1A61EE628F4057100DEA1ED /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A61EE528F4057100DEA1ED /* UserModel.swift */; };
+		A1A61EE828F48D1500DEA1ED /* GalleryOrCameraAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A61EE728F48D1500DEA1ED /* GalleryOrCameraAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +96,8 @@
 		A18DD59C28F050E300920596 /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
 		A18DD59E28F053FF00920596 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		A18DD5A228F0861500920596 /* PF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PF.swift; sourceTree = "<group>"; };
+		A1A61EE528F4057100DEA1ED /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		A1A61EE728F48D1500DEA1ED /* GalleryOrCameraAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryOrCameraAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +152,7 @@
 				8474876828C7D22600C122CC /* OkAlert.swift */,
 				8480A5D128D3C7260096085C /* OkCancelAlert.swift */,
 				84B93A2B28D11C7B0026F175 /* CustomAlert.swift */,
+				A1A61EE728F48D1500DEA1ED /* GalleryOrCameraAlert.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 			children = (
 				84E9338A28C4EAA2002BAAD4 /* WorkoutModel.swift */,
 				84B93A2D28D11CA90026F175 /* DifferenceWorkout.swift */,
+				A1A61EE528F4057100DEA1ED /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -410,6 +416,7 @@
 				A18DD5A328F0861500920596 /* PF.swift in Sources */,
 				848F30CE28B6C2E700BF1EFF /* AppDelegate.swift in Sources */,
 				84717E5928BD443100737FA7 /* ExercisesTableViewCell.swift in Sources */,
+				A1A61EE628F4057100DEA1ED /* UserModel.swift in Sources */,
 				84956B0F28DB28E4009692AB /* ProfileViewController.swift in Sources */,
 				8474876928C7D22600C122CC /* OkAlert.swift in Sources */,
 				847DE06328C69D5C009E83E2 /* StartWorkoutWithRepsViewController.swift in Sources */,
@@ -423,6 +430,7 @@
 				84F025C628C8D66900279F43 /* UITextField + Extension.swift in Sources */,
 				84717E5328BCC7B200737FA7 /* UIStackView + Extension.swift in Sources */,
 				84BE16D228BAA04E001BC967 /* UIView + Extension.swift in Sources */,
+				A1A61EE828F48D1500DEA1ED /* GalleryOrCameraAlert.swift in Sources */,
 				84B93A2C28D11C7B0026F175 /* CustomAlert.swift in Sources */,
 				84717E5B28BD55BB00737FA7 /* UILabel + Extension.swift in Sources */,
 				84AC491528BB587900C73C65 /* CalendarCollectionViewCell.swift in Sources */,
