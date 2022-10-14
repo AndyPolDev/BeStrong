@@ -46,11 +46,13 @@
 		84E9339028C4FA8B002BAAD4 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9338F28C4FA8B002BAAD4 /* Date + Extension.swift */; };
 		84F025C128C8A9D100279F43 /* EditingProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F025C028C8A9D100279F43 /* EditingProfileViewController.swift */; };
 		84F025C628C8D66900279F43 /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F025C528C8D66900279F43 /* UITextField + Extension.swift */; };
+		A1182E9E28F953E000380565 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1182E9D28F953DF00380565 /* Notifications.swift */; };
 		A18DD59D28F050E300920596 /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18DD59C28F050E300920596 /* ProgressCollectionViewCell.swift */; };
 		A18DD59F28F053FF00920596 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18DD59E28F053FF00920596 /* ProgressView.swift */; };
-		A18DD5A328F0861500920596 /* PF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18DD5A228F0861500920596 /* PF.swift */; };
 		A1A61EE628F4057100DEA1ED /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A61EE528F4057100DEA1ED /* UserModel.swift */; };
 		A1A61EE828F48D1500DEA1ED /* GalleryOrCameraAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A61EE728F48D1500DEA1ED /* GalleryOrCameraAlert.swift */; };
+		A1DC388A28F6AE2200FC6996 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DC388928F6AE2200FC6996 /* File.swift */; };
+		A1DC388C28F6AF3200FC6996 /* ResultWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DC388B28F6AF3200FC6996 /* ResultWorkout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,11 +95,13 @@
 		84E9338F28C4FA8B002BAAD4 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		84F025C028C8A9D100279F43 /* EditingProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingProfileViewController.swift; sourceTree = "<group>"; };
 		84F025C528C8D66900279F43 /* UITextField + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extension.swift"; sourceTree = "<group>"; };
+		A1182E9D28F953DF00380565 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		A18DD59C28F050E300920596 /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
 		A18DD59E28F053FF00920596 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
-		A18DD5A228F0861500920596 /* PF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PF.swift; sourceTree = "<group>"; };
 		A1A61EE528F4057100DEA1ED /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		A1A61EE728F48D1500DEA1ED /* GalleryOrCameraAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryOrCameraAlert.swift; sourceTree = "<group>"; };
+		A1DC388928F6AE2200FC6996 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		A1DC388B28F6AF3200FC6996 /* ResultWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultWorkout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +215,7 @@
 			children = (
 				848F30CD28B6C2E700BF1EFF /* AppDelegate.swift */,
 				848F30CF28B6C2E700BF1EFF /* SceneDelegate.swift */,
+				A1182E9D28F953DF00380565 /* Notifications.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -226,7 +231,7 @@
 				8474876228C76CFF00C122CC /* StartWorkoutWithTimerViewController.swift */,
 				84956B0E28DB28E4009692AB /* ProfileViewController.swift */,
 				84F025C028C8A9D100279F43 /* EditingProfileViewController.swift */,
-				A18DD5A228F0861500920596 /* PF.swift */,
+				A1DC388928F6AE2200FC6996 /* File.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -266,8 +271,9 @@
 			isa = PBXGroup;
 			children = (
 				84E9338A28C4EAA2002BAAD4 /* WorkoutModel.swift */,
-				84B93A2D28D11CA90026F175 /* DifferenceWorkout.swift */,
 				A1A61EE528F4057100DEA1ED /* UserModel.swift */,
+				84B93A2D28D11CA90026F175 /* DifferenceWorkout.swift */,
+				A1DC388B28F6AF3200FC6996 /* ResultWorkout.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -409,11 +415,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1182E9E28F953E000380565 /* Notifications.swift in Sources */,
 				84BE16D428BAA59E001BC967 /* UIFont + Extension.swift in Sources */,
 				8474876328C76CFF00C122CC /* StartWorkoutWithTimerViewController.swift in Sources */,
 				848F30D228B6C2E700BF1EFF /* MainViewController.swift in Sources */,
 				8491F73628C26CF7007818E0 /* MainTabBarController.swift in Sources */,
-				A18DD5A328F0861500920596 /* PF.swift in Sources */,
+				A1DC388C28F6AF3200FC6996 /* ResultWorkout.swift in Sources */,
 				848F30CE28B6C2E700BF1EFF /* AppDelegate.swift in Sources */,
 				84717E5928BD443100737FA7 /* ExercisesTableViewCell.swift in Sources */,
 				A1A61EE628F4057100DEA1ED /* UserModel.swift in Sources */,
@@ -427,6 +434,7 @@
 				8474876628C78BF400C122CC /* DetailsWithTimerView.swift in Sources */,
 				84D5646728B8D208004A25ED /* WeatherView.swift in Sources */,
 				84F025C128C8A9D100279F43 /* EditingProfileViewController.swift in Sources */,
+				A1DC388A28F6AE2200FC6996 /* File.swift in Sources */,
 				84F025C628C8D66900279F43 /* UITextField + Extension.swift in Sources */,
 				84717E5328BCC7B200737FA7 /* UIStackView + Extension.swift in Sources */,
 				84BE16D228BAA04E001BC967 /* UIView + Extension.swift in Sources */,

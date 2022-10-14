@@ -1,5 +1,5 @@
-
 import UIKit
+import RealmSwift
 
 class ProgressView: UIView {
     
@@ -17,6 +17,8 @@ class ProgressView: UIView {
     
     private let idProgressCollectionViewCell = "idProgressCollectionViewCell"
     
+    private var resultWorkout = [ResultWorkout]()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -31,7 +33,6 @@ class ProgressView: UIView {
     }
     
     private func setupViews() {
-        //backgroundColor = .red
         translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(collectionView)
@@ -44,6 +45,45 @@ class ProgressView: UIView {
         collectionView.dataSource = self
     }
     
+    private func getWorkoutName(model: Results<WorkoutModel>!) -> [String] {
+        
+        var nameArray = [String]()
+        
+        for workoutModel in model {
+            if !nameArray.contains(workoutModel.workoutName) {
+                nameArray.append(workoutModel.workoutName)
+            }
+        }
+        return nameArray
+    }
+    
+    private func getWorkoutResults(model:  Results<WorkoutModel>!) {
+        
+        let nameArray = getWorkoutName(model: model)
+        
+        for name in nameArray {
+            let predicateName = NSPredicate(format: "workoutName = '\(name)'")
+            
+            let workoutModel = model
+                .filter(predicateName)
+                .sorted(byKeyPath: "workoutName")
+            var result = 0
+            var image: Data?
+            workoutModel.forEach { model in
+                result += model.workoutReps
+                image = model.workoutImage
+            }
+            
+            let resultModel = ResultWorkout(name: name, result: result, imageData: image)
+            resultWorkout.append(resultModel)
+        }
+    }
+    
+    internal func configureProgressCollectionView(model: Results<WorkoutModel>!) {
+        resultWorkout = [ResultWorkout]()
+        getWorkoutResults(model: model)
+        collectionView.reloadData()
+    }
 }
 
 //MARK: - UICollectionViewDataSource
@@ -51,13 +91,14 @@ class ProgressView: UIView {
 extension ProgressView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        8
+        resultWorkout.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idProgressCollectionViewCell, for: indexPath) as! ProgressCollectionViewCell
-        cell.cellConfigure()
+        let model = resultWorkout[indexPath.row]
+        cell.cellConfigure(model: model)
         cell.backgroundColor = (indexPath.row % 4 == 0 || indexPath.row % 4 == 3 ? .specialGreen : .specialDarkYellow)
         return cell
     }
@@ -69,10 +110,11 @@ extension ProgressView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("select \(indexPath.item)")
+        //progressView.setProgress(0.6, animated: true)
     }
 }
 
-//MARK: - UICollectionViewDelegate
+//MARK: - UICollectionViewDelegateFlowLayout
 
 extension ProgressView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -83,10 +125,6 @@ extension ProgressView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         5
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        progressView.setProgress(0.6, animated: true)
-//    }
 }
 
 //MARK: - Set Constraints

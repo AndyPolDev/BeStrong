@@ -51,8 +51,12 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         addSubview(numberLabel)
     }
     
-    func cellConfigure() {
-    
+    func cellConfigure(model: ResultWorkout) {
+        nameLabel.text = model.name
+        numberLabel.text = "\(model.result)"
+        
+        guard let imageData = model.imageData else { return }
+        workoutImageView.image = UIImage(data: imageData)?.withRenderingMode(.alwaysTemplate)
     }
     
     private func setConstraints() {

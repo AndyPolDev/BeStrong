@@ -1,4 +1,5 @@
 import UIKit
+import RealmSwift
 
 class ProfileViewController: UIViewController {
     
@@ -24,7 +25,7 @@ class ProfileViewController: UIViewController {
         return view
     }()
     
-    private let userNameLabel = UILabel(text: "ANDYPOLDEV", font: .robotoBold24(), textColor: .white)
+    private let userNameLabel = UILabel(text: "Unknown", font: .robotoBold24(), textColor: .white)
     
     private let heightLabel = UILabel(text: "Height:", font: .robotoBold16(), textColor: .specialGray)
     private let weightLabel = UILabel(text: "Weight:", font: .robotoBold16(), textColor: .specialGray)
@@ -52,21 +53,34 @@ class ProfileViewController: UIViewController {
     
     private let progressView: UIProgressView = {
        let progressView = UIProgressView()
-        progressView.trackTintColor = .specialTabBar
+        progressView.trackTintColor = .specialBrown
         progressView.progressTintColor = .specialGreen
         progressView.setProgress(0.2, animated: true)
         progressView.clipsToBounds = true
         progressView.translatesAutoresizingMaskIntoConstraints = false
         return progressView
     }()
-
     
+    private let localRealm = try! Realm()
+    private var workoutArray: Results<WorkoutModel>!
+    private var userArray: Results<UserModel>!
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userArray = localRealm.objects(UserModel.self)
         
         setupViews()
         setConstraints()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        workoutArray = localRealm.objects(WorkoutModel.self)
+        progressCollectionView.configureProgressCollectionView(model: workoutArray)
+        setupUserParameters()
     }
     
     override func viewDidLayoutSubviews() {
@@ -95,6 +109,20 @@ class ProfileViewController: UIViewController {
         view.addSubview(goalLabel)
         view.addSubview(progressView)
 
+    }
+    
+    private func setupUserParameters() {
+        if userArray.count != 0 {
+            userNameLabel.text = userArray[0].userFirstName + " " + userArray[0].userSecondName
+            heightLabel.text = "Height: \(userArray[0].userHeight)"
+            weightLabel.text = "Weight: \(userArray[0].userWeight)"
+            targetLabel.text = "Target: \(userArray[0].userTarget)"
+            goalLabel.text = "\(userArray[0].userTarget)"
+            
+            guard let imageData = userArray[0].userImage else { return }
+            userPhoto.image = UIImage(data: imageData)
+            userPhoto.contentMode = .scaleAspectFit
+        }
     }
     
     @objc private func editingButtonPressed() {

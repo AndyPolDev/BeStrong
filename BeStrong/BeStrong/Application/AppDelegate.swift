@@ -3,6 +3,8 @@ import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let notifications = Notifications()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -13,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print("Error initialising new realm, \(error)")
         }
+        
+        notifications.requestAutorization()
         
         return true
     }

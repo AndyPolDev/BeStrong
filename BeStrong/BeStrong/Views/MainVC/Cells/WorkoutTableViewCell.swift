@@ -126,6 +126,7 @@ class WorkoutTableViewCell: UITableViewCell {
             startButton.setTitle("START", for: .normal)
             startButton.tintColor = .specialDarkGreen
             startButton.backgroundColor = .specialYellow
+            startButton.isEnabled = true
         }
         
         guard let imageData = model.workoutImage else { return }

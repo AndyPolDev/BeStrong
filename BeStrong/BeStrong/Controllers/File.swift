@@ -1,4 +1,5 @@
 import UIKit
+import RealmSwift
 
 class PF: UIViewController {
 
@@ -66,7 +67,7 @@ class PF: UIViewController {
         button.semanticContentAttribute = .forceRightToLeft
         button.setImage(UIImage(named: "profileEditing"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(editingButtonTap), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(editingButtonTap), for: .touchUpInside)
         return button
     }()
     
@@ -76,7 +77,7 @@ class PF: UIViewController {
         let collectionVIew = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionVIew.translatesAutoresizingMaskIntoConstraints = false
         collectionVIew.bounces = false
-        collectionVIew.showsHorizontalScrollIndicator = true
+        collectionVIew.showsHorizontalScrollIndicator = false
         collectionVIew.backgroundColor = .none
         return collectionVIew
     }()
@@ -134,6 +135,12 @@ class PF: UIViewController {
     
     private let idProfileCollectionViewCell = "idProfileCollectionViewCell"
 
+    private let localRealm = try! Realm()
+    private var workoutArray: Results<WorkoutModel>!
+    private var userArray: Results<UserModel>!
+    
+    private var resultWorkout = [ResultWorkout]()
+    
     override func viewDidLayoutSubviews() {
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.height / 2
     }
@@ -141,14 +148,17 @@ class PF: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        resultWorkout = [ResultWorkout]()
+        getWorkoutResults()
         collectionView.reloadData()
-        
+        setupUserParameters()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
- 
+        userArray = localRealm.objects(UserModel.self)
+        
         setupViews()
         setConstraints()
         setDelegates()
@@ -169,7 +179,7 @@ class PF: UIViewController {
         view.addSubview(userParamStackView)
         view.addSubview(editingButton)
         view.addSubview(collectionView)
-        collectionView.register(ProgressCollectionViewCell.self, forCellWithReuseIdentifier: idProfileCollectionViewCell)
+        collectionView.register(PF.self, forCellWithReuseIdentifier: idProfileCollectionViewCell)
         
         view.addSubview(targetLabel)
         
@@ -187,8 +197,56 @@ class PF: UIViewController {
         collectionView.dataSource = self
     }
     
-    @objc private func editingButtonTap() {
+//    @objc private func editingButtonTap() {
+//        let settingViewController = SettingViewController()
+//        settingViewController.modalPresentationStyle = .fullScreen
+//        present(settingViewController, animated: true)
+//    }
+
+    private func getWorkoutsName() -> [String] {
+
+        var nameArray = [String]()
+        workoutArray = localRealm.objects(WorkoutModel.self)
+
+        for workoutModel in workoutArray {
+            if !nameArray.contains(workoutModel.workoutName) {
+                nameArray.append(workoutModel.workoutName)
+            }
+        }
+        return nameArray
+    }
+    
+    private func getWorkoutResults() {
+
+        let nameArray = getWorkoutsName()
+
+        for name in nameArray {
+            let predicateName = NSPredicate(format: "workoutName = '\(name)'")
+            workoutArray = localRealm.objects(WorkoutModel.self).filter(predicateName).sorted(byKeyPath: "workoutName")
+            var result = 0
+            var image: Data?
+            workoutArray.forEach { model in
+                result += model.workoutReps
+                image = model.workoutImage
+            }
+            let resultModel = ResultWorkout(name: name, result: result, imageData: image)
+            resultWorkout.append(resultModel)
+        }
+    }
+    
+    private func setupUserParameters() {
         
+        if userArray.count != 0 {
+            userNameLabel.text = userArray[0].userFirstName + " " + userArray[0].userSecondName
+            userHeightLabel.text = "Height: \(userArray[0].userHeight)"
+            userWeightLabel.text = "Weight: \(userArray[0].userWeight)"
+            targetLabel.text = "TARGET: \(userArray[0].userTarget)"
+            workoutsTargetLabel.text = "\(userArray[0].userTarget)"
+            
+            guard let data = userArray[0].userImage else { return }
+            guard let image = UIImage(data: data) else { return }
+            userPhotoImageView.image = image
+        }
     }
 }
 
@@ -197,14 +255,15 @@ class PF: UIViewController {
 extension PF: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        8
+        resultWorkout.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idProfileCollectionViewCell, for: indexPath) as! ProgressCollectionViewCell
-      
-        cell.backgroundColor = (indexPath.row % 4 == 0 || indexPath.row % 4 == 3 ? .specialGreen : .specialDarkYellow)
-        return cell
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idProfileCollectionViewCell, for: indexPath) as! PF
+//        let model = resultWorkout[indexPath.row]
+//        cell.cellConfigure(model: model)
+//        cell.backgroundColor = (indexPath.row % 4 == 0 || indexPath.row % 4 == 3 ? .specialGreen : .specialDarkYellow)
+       return UICollectionViewCell()
     }
 }
 
@@ -220,9 +279,9 @@ extension PF: UICollectionViewDelegateFlowLayout {
         5
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        progressView.setProgress(0.6, animated: true)
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        progressView.setProgress(0.6, animated: true)
+    }
 }
 
 //MARK: - SetConstraints
@@ -269,8 +328,8 @@ extension PF {
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: userParamStackView.bottomAnchor, constant: 20),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             collectionView.heightAnchor.constraint(equalToConstant: 250)
         ])
         
@@ -300,5 +359,4 @@ extension PF {
         ])
     }
 }
-
 
