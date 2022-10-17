@@ -18,10 +18,44 @@ class Notifications: NSObject {
     
     func getNotificationSettings() {
         notificationCenter.getNotificationSettings { settings in
-           // print(settings)
+            // print(settings)
         }
     }
     
+    func scheduleDateNotification(date: Date, id: String) {
+        
+        let content = UNMutableNotificationContent()
+        content.title = "WORKOUT"
+        content.body = "You have training today"
+        content.sound = .default
+        content.badge = 1
+        
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+        var triggerDate = calendar.dateComponents([.year, .month, .day], from: date)
+        triggerDate.hour = 12
+        triggerDate.minute = 00
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+        notificationCenter.add(request) { error in
+            if error != nil {
+                print(error?.localizedDescription ?? "Notification error")
+            }
+        }
+    }
+}
+
+extension Notifications: UNUserNotificationCenterDelegate {
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        notificationCenter.removeAllDeliveredNotifications()
+    }
 }

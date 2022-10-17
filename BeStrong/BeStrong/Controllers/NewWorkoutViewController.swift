@@ -120,6 +120,7 @@ class NewWorkoutViewController: UIViewController {
             workoutModel.workoutSets != 0 &&
             (workoutModel.workoutReps != 0 || workoutModel.workoutTimer != 0) {
             RealmManager.shared.saveWorkoutModel(model: workoutModel)
+            createNotifications()
             workoutModel = WorkoutModel()
             alertOK(title: "Success", messoge: nil)
             refreshObjects()
@@ -140,6 +141,12 @@ class NewWorkoutViewController: UIViewController {
         dateAndRepeatView.refreshDatePickerAndSwitch()
         repsOrTimerView.refreshLabelsAndSliders()
         nameTextField.text = ""
+    }
+    
+    private func createNotifications() {
+        let notifications = Notifications()
+        let stringDate = workoutModel.workoutDate.ddMMyyyyFromDate()
+        notifications.scheduleDateNotification(date: workoutModel.workoutDate, id: "workout" + stringDate)
     }
     
     @objc private func closeButtonPressed() {

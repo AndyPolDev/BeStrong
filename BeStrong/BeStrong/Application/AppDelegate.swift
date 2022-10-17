@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         notifications.requestAutorization()
+        notifications.notificationCenter.delegate = notifications
         
         return true
     }
