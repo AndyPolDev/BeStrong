@@ -47,6 +47,9 @@
 		84F025C128C8A9D100279F43 /* EditingProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F025C028C8A9D100279F43 /* EditingProfileViewController.swift */; };
 		84F025C628C8D66900279F43 /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F025C528C8D66900279F43 /* UITextField + Extension.swift */; };
 		A1182E9E28F953E000380565 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1182E9D28F953DF00380565 /* Notifications.swift */; };
+		A15D89E028FD20960072D5CF /* OnboardingStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D89DF28FD20960072D5CF /* OnboardingStruct.swift */; };
+		A15D89E428FD21380072D5CF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D89E328FD21380072D5CF /* OnboardingViewController.swift */; };
+		A15D89E728FD598B0072D5CF /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D89E628FD598B0072D5CF /* OnboardingCollectionViewCell.swift */; };
 		A18DD59D28F050E300920596 /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18DD59C28F050E300920596 /* ProgressCollectionViewCell.swift */; };
 		A18DD59F28F053FF00920596 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18DD59E28F053FF00920596 /* ProgressView.swift */; };
 		A1A61EE628F4057100DEA1ED /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A61EE528F4057100DEA1ED /* UserModel.swift */; };
@@ -96,6 +99,9 @@
 		84F025C028C8A9D100279F43 /* EditingProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingProfileViewController.swift; sourceTree = "<group>"; };
 		84F025C528C8D66900279F43 /* UITextField + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extension.swift"; sourceTree = "<group>"; };
 		A1182E9D28F953DF00380565 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		A15D89DF28FD20960072D5CF /* OnboardingStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStruct.swift; sourceTree = "<group>"; };
+		A15D89E328FD21380072D5CF /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		A15D89E628FD598B0072D5CF /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		A18DD59C28F050E300920596 /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
 		A18DD59E28F053FF00920596 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		A1A61EE528F4057100DEA1ED /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -223,6 +229,7 @@
 		848F30E828B6C54600BF1EFF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A15D89E328FD21380072D5CF /* OnboardingViewController.swift */,
 				8491F73528C26CF7007818E0 /* MainTabBarController.swift */,
 				848F30D128B6C2E700BF1EFF /* MainViewController.swift */,
 				84717E5428BD35F800737FA7 /* StatisticViewController.swift */,
@@ -274,6 +281,7 @@
 				A1A61EE528F4057100DEA1ED /* UserModel.swift */,
 				84B93A2D28D11CA90026F175 /* DifferenceWorkout.swift */,
 				A1DC388B28F6AF3200FC6996 /* ResultWorkout.swift */,
+				A15D89DF28FD20960072D5CF /* OnboardingStruct.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -281,6 +289,7 @@
 		84C3748D28B8084300FEC230 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A15D89E528FD587A0072D5CF /* OnboardingVC */,
 				8474876728C7D20900C122CC /* Alerts */,
 				84C3748E28B8121200FEC230 /* MainVC */,
 				84717E5628BD435900737FA7 /* StatisticsVC */,
@@ -318,6 +327,14 @@
 				84E9338D28C4EDEA002BAAD4 /* RealmManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		A15D89E528FD587A0072D5CF /* OnboardingVC */ = {
+			isa = PBXGroup;
+			children = (
+				A15D89E628FD598B0072D5CF /* OnboardingCollectionViewCell.swift */,
+			);
+			path = OnboardingVC;
 			sourceTree = "<group>";
 		};
 		A18DD59A28F0505000920596 /* ProfileVC */ = {
@@ -423,6 +440,7 @@
 				A1DC388C28F6AF3200FC6996 /* ResultWorkout.swift in Sources */,
 				848F30CE28B6C2E700BF1EFF /* AppDelegate.swift in Sources */,
 				84717E5928BD443100737FA7 /* ExercisesTableViewCell.swift in Sources */,
+				A15D89E028FD20960072D5CF /* OnboardingStruct.swift in Sources */,
 				A1A61EE628F4057100DEA1ED /* UserModel.swift in Sources */,
 				84956B0F28DB28E4009692AB /* ProfileViewController.swift in Sources */,
 				8474876928C7D22600C122CC /* OkAlert.swift in Sources */,
@@ -441,6 +459,7 @@
 				A1A61EE828F48D1500DEA1ED /* GalleryOrCameraAlert.swift in Sources */,
 				84B93A2C28D11C7B0026F175 /* CustomAlert.swift in Sources */,
 				84717E5B28BD55BB00737FA7 /* UILabel + Extension.swift in Sources */,
+				A15D89E428FD21380072D5CF /* OnboardingViewController.swift in Sources */,
 				84AC491528BB587900C73C65 /* CalendarCollectionViewCell.swift in Sources */,
 				8480A5D228D3C7260096085C /* OkCancelAlert.swift in Sources */,
 				8491F73828C27606007818E0 /* NewWorkoutViewController.swift in Sources */,
@@ -450,6 +469,7 @@
 				84B93A2E28D11CA90026F175 /* DifferenceWorkout.swift in Sources */,
 				848F30D028B6C2E700BF1EFF /* SceneDelegate.swift in Sources */,
 				84E9338E28C4EDEA002BAAD4 /* RealmManager.swift in Sources */,
+				A15D89E728FD598B0072D5CF /* OnboardingCollectionViewCell.swift in Sources */,
 				84723DF828C3C4A30097A316 /* DateAndRepeatView.swift in Sources */,
 				84723DFA28C3EED40097A316 /* RepsOrTimerView.swift in Sources */,
 				A18DD59F28F053FF00920596 /* ProgressView.swift in Sources */,

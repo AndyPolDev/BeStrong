@@ -102,6 +102,11 @@ class MainViewController: UIViewController {
         tableView.reloadData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showOnboarding()
+    }
+    
     private func setupViews() {
         view.backgroundColor = .specialBackground
         
@@ -160,6 +165,16 @@ class MainViewController: UIViewController {
             
             guard let imageData = userArray[0].userImage else { return }
             userPhoto.image = UIImage(data: imageData)
+        }
+    }
+    
+    private func showOnboarding() {
+        let userDefaults = UserDefaults.standard
+        let onboardingViewed = userDefaults.bool(forKey: "OnboardingViewed")
+        if onboardingViewed == false {
+            let onboardingViewController = OnboardingViewController()
+            onboardingViewController.modalPresentationStyle = .fullScreen
+            present(onboardingViewController, animated: true)
         }
     }
     
