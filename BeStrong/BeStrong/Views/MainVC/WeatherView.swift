@@ -3,25 +3,23 @@ import UIKit
 class WeatherView: UIView {
     
     private let weatherIconImageView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.image = UIImage(named: "sun")
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private let weatherStatusLabel: UILabel = {
+    private let cityNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Солнечно"
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .specialGray
-        label.font = .robotoMedium18()
+        label.font = .robotoMedium24()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let weatherDiscriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Хорошая погода, чтобы позаниматься на улице"
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .specialGray
         label.font = .robotoMedium14()
@@ -42,20 +40,38 @@ class WeatherView: UIView {
     }
     
     private func setupViews() {
-        backgroundColor = UIColor(rgb: 0xF9F9F9)
+        backgroundColor = .specialBrown
         layer.cornerRadius = 10
         translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(weatherIconImageView)
-        addSubview(weatherStatusLabel)
+        addSubview(cityNameLabel)
         addSubview(weatherDiscriptionLabel)
+    }
+    
+    private func updateLabels(model: WeatherModel) {
+        cityNameLabel.text = model.name
+        weatherDiscriptionLabel.text = model.weather[0].myDescription + " \(Int(model.main.temp))°C"
+    }
+    
+    private func updateImage(data: Data) {
+        guard let image = UIImage(data: data) else { return }
+        weatherIconImageView.image = image
+    }
+    
+    internal func setWeather (model: WeatherModel) {
+        updateLabels(model: model)
+    }
+    
+    internal func setWeatherImage(imageData: Data) {
+        updateImage(data: imageData)
     }
 }
 
 //MARK: - Set Constraints
 
 extension WeatherView {
-
+    
     private func setContraints() {
         NSLayoutConstraint.activate([
             weatherIconImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -65,14 +81,14 @@ extension WeatherView {
         ])
         
         NSLayoutConstraint.activate([
-            weatherStatusLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            weatherStatusLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            weatherStatusLabel.trailingAnchor.constraint(equalTo: weatherIconImageView.leadingAnchor, constant: -10),
-            weatherStatusLabel.heightAnchor.constraint(equalToConstant: 20)
+            cityNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            cityNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            cityNameLabel.trailingAnchor.constraint(equalTo: weatherIconImageView.leadingAnchor, constant: -10),
+            cityNameLabel.heightAnchor.constraint(equalToConstant: 25)
         ])
         
         NSLayoutConstraint.activate([
-            weatherDiscriptionLabel.topAnchor.constraint(equalTo: weatherStatusLabel.bottomAnchor, constant: 0),
+            weatherDiscriptionLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 0),
             weatherDiscriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             weatherDiscriptionLabel.trailingAnchor.constraint(equalTo: weatherIconImageView.leadingAnchor, constant: -10),
             weatherDiscriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)

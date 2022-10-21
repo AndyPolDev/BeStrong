@@ -100,6 +100,7 @@ class MainViewController: UIViewController {
         setupParameters()
         getWorkouts(date: selectedDate)
         tableView.reloadData()
+        getWeather()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -175,6 +176,24 @@ class MainViewController: UIViewController {
             let onboardingViewController = OnboardingViewController()
             onboardingViewController.modalPresentationStyle = .fullScreen
             present(onboardingViewController, animated: true)
+        }
+    }
+    
+    private func getWeather() {
+        NetworkDataFetch.shared.fetchWeather { [weak self] result, error in
+            guard let self = self else { return }
+            if let model = result {
+                self.weatherView.setWeather(model: model)
+                NetworkImageRequest.shared.requestData(id: model.weather[0].icon) { [weak self] result in
+                    guard let self = self else { return }
+                    switch result {
+                    case .success(let data):
+                        self.weatherView.setWeatherImage(imageData: data)
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            }
         }
     }
     
@@ -313,7 +332,7 @@ extension MainViewController {
             noTrainingImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             noTrainingImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             noTrainingImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1)
-        
+            
         ])
     }
 }
