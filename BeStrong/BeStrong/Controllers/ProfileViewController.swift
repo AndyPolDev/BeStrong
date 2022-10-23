@@ -45,27 +45,27 @@ class ProfileViewController: UIViewController {
     }()
     
     private let progressCollectionView = ProgressView()
-
-    private let targetLabel = UILabel(text: "TARGET:", font: .robotoBold16(), textColor: .specialGray)
+//
+//    private let targetLabel = UILabel(text: "TARGET:", font: .robotoBold16(), textColor: .specialGray)
+//
+//    private let currentProgressLabel = UILabel(text: "2", font: .robotoBold24(), textColor: .specialGray)
+//    private let goalLabel = UILabel(text: "20", font: .robotoBold24(), textColor: .specialGray)
     
-    private let currentProgressLabel = UILabel(text: "2", font: .robotoBold24(), textColor: .specialGray)
-    private let goalLabel = UILabel(text: "20", font: .robotoBold24(), textColor: .specialGray)
-    
-    private let progressView: UIProgressView = {
-       let progressView = UIProgressView()
-        progressView.trackTintColor = .specialBrown
-        progressView.progressTintColor = .specialGreen
-        progressView.setProgress(0.2, animated: true)
-        progressView.clipsToBounds = true
-        progressView.translatesAutoresizingMaskIntoConstraints = false
-        return progressView
-    }()
-    
+//    private let progressView: UIProgressView = {
+//        let progressView = UIProgressView()
+//        progressView.trackTintColor = .specialBrown
+//        progressView.progressTintColor = .specialGreen
+//        progressView.setProgress(0.2, animated: true)
+//        progressView.clipsToBounds = true
+//        progressView.translatesAutoresizingMaskIntoConstraints = false
+//        return progressView
+//    }()
+//
     private let localRealm = try! Realm()
     private var workoutArray: Results<WorkoutModel>!
     private var userArray: Results<UserModel>!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,7 +87,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         userPhoto.layer.cornerRadius = userPhoto.frame.width / 2
-        progressView.layer.cornerRadius = progressView.frame.height / 2
+        //progressView.layer.cornerRadius = progressView.frame.height / 2
         
     }
     
@@ -104,11 +104,11 @@ class ProfileViewController: UIViewController {
         view.addSubview(labelStackView)
         view.addSubview(editingButton)
         view.addSubview(progressCollectionView)
-        view.addSubview(targetLabel)
-        view.addSubview(currentProgressLabel)
-        view.addSubview(goalLabel)
-        view.addSubview(progressView)
-
+//        view.addSubview(targetLabel)
+//        view.addSubview(currentProgressLabel)
+//        view.addSubview(goalLabel)
+//        view.addSubview(progressView)
+        
     }
     
     private func setupUserParameters() {
@@ -116,8 +116,8 @@ class ProfileViewController: UIViewController {
             userNameLabel.text = userArray[0].userFirstName + " " + userArray[0].userSecondName
             heightLabel.text = "Height: \(userArray[0].userHeight)"
             weightLabel.text = "Weight: \(userArray[0].userWeight)"
-            targetLabel.text = "Target: \(userArray[0].userTarget)"
-            goalLabel.text = "\(userArray[0].userTarget)"
+//            targetLabel.text = "Target: \(userArray[0].userTarget)"
+//            goalLabel.text = "\(userArray[0].userTarget)"
             
             guard let imageData = userArray[0].userImage else { return }
             userPhoto.image = UIImage(data: imageData)
@@ -176,27 +176,27 @@ extension ProfileViewController {
             progressCollectionView.heightAnchor.constraint(equalToConstant: 250)
         ])
         
-        NSLayoutConstraint.activate([
-            targetLabel.topAnchor.constraint(equalTo: progressCollectionView.bottomAnchor, constant: 10),
-            targetLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
-        ])
-        
-        NSLayoutConstraint.activate([
-            currentProgressLabel.topAnchor.constraint(equalTo: targetLabel.bottomAnchor, constant: 0),
-            currentProgressLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30)
-        ])
-        
-        NSLayoutConstraint.activate([
-            goalLabel.centerYAnchor.constraint(equalTo: currentProgressLabel.centerYAnchor),
-            goalLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
-        ])
-        
-        NSLayoutConstraint.activate([
-            progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            progressView.topAnchor.constraint(equalTo: currentProgressLabel.bottomAnchor, constant: 5),
-            progressView.heightAnchor.constraint(equalToConstant: 30)
-        ])
+//        NSLayoutConstraint.activate([
+//            targetLabel.topAnchor.constraint(equalTo: progressCollectionView.bottomAnchor, constant: 10),
+//            targetLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+//        ])
+//
+//        NSLayoutConstraint.activate([
+//            currentProgressLabel.topAnchor.constraint(equalTo: targetLabel.bottomAnchor, constant: 0),
+//            currentProgressLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30)
+//        ])
+//
+//        NSLayoutConstraint.activate([
+//            goalLabel.centerYAnchor.constraint(equalTo: currentProgressLabel.centerYAnchor),
+//            goalLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
+//        ])
+//
+//        NSLayoutConstraint.activate([
+//            progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+//            progressView.topAnchor.constraint(equalTo: currentProgressLabel.bottomAnchor, constant: 5),
+//            progressView.heightAnchor.constraint(equalToConstant: 30)
+//        ])
         
     }
 }

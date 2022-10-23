@@ -57,8 +57,8 @@ class EditingProfileViewController: UIViewController {
     private let weightLabel = UILabel(text: "Weight")
     private let weightTextField = UITextField.createSimpleTextField()
     
-    private let targetLabel = UILabel(text: "Target")
-    private let targetTextField = UITextField.createSimpleTextField()
+//    private let targetLabel = UILabel(text: "Target")
+//    private let targetTextField = UITextField.createSimpleTextField()
     
     private lazy var saveButton: UIButton = {
         let button = UIButton(type: .system)
@@ -112,8 +112,8 @@ class EditingProfileViewController: UIViewController {
         view.addSubview(heightTextField)
         view.addSubview(weightLabel)
         view.addSubview(weightTextField)
-        view.addSubview(targetLabel)
-        view.addSubview(targetTextField)
+//        view.addSubview(targetLabel)
+//        view.addSubview(targetTextField)
         view.addSubview(saveButton)
     }
     
@@ -136,18 +136,16 @@ class EditingProfileViewController: UIViewController {
         guard let firstName = firstNameTextField.text,
               let secondName = secondNameTextField.text,
               let userHeight = heightTextField.text,
-              let userWeight = weightTextField.text,
-              let userTarget = targetTextField.text else { return }
+              let userWeight = weightTextField.text else { return }
         
         guard let intUserHeight = Int(userHeight),
-              let intUserWeight = Int(userWeight),
-              let intUserTarget = Int(userTarget) else { return }
+              let intUserWeight = Int(userWeight) else { return }
         
         userModel.userFirstName = firstName
         userModel.userSecondName = secondName
         userModel.userHeight = intUserHeight
         userModel.userWeight = intUserWeight
-        userModel.userTarget = intUserTarget
+        //userModel.userTarget = intUserTarget
         
         if userPhoto.image == UIImage(named: "addUser") {
             userModel.userImage = nil
@@ -163,7 +161,7 @@ class EditingProfileViewController: UIViewController {
             secondNameTextField.text = userArray[0].userSecondName
             heightTextField.text = String(userArray[0].userHeight)
             weightTextField.text = String(userArray[0].userWeight)
-            targetTextField.text = String(userArray[0].userTarget)
+            //targetTextField.text = String(userArray[0].userTarget)
             
             guard let imageData = userArray[0].userImage else { return }
             guard let userImage = UIImage(data: imageData) else { return }
@@ -323,21 +321,21 @@ extension EditingProfileViewController {
             weightTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
         
-        NSLayoutConstraint.activate([
-            targetLabel.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 15),
-            targetLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            targetLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-        ])
+//        NSLayoutConstraint.activate([
+//            targetLabel.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 15),
+//            targetLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+//            targetLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+//        ])
+//
+//        NSLayoutConstraint.activate([
+//            targetTextField.topAnchor.constraint(equalTo: targetLabel.bottomAnchor, constant: 3),
+//            targetTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            targetTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+//            targetTextField.heightAnchor.constraint(equalToConstant: 40)
+//        ])
         
         NSLayoutConstraint.activate([
-            targetTextField.topAnchor.constraint(equalTo: targetLabel.bottomAnchor, constant: 3),
-            targetTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            targetTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            targetTextField.heightAnchor.constraint(equalToConstant: 40)
-        ])
-        
-        NSLayoutConstraint.activate([
-            saveButton.topAnchor.constraint(equalTo: targetTextField.bottomAnchor, constant: 40),
+            saveButton.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 40),
             saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             saveButton.heightAnchor.constraint(equalToConstant: 55)

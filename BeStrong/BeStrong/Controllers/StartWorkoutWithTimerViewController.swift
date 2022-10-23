@@ -51,7 +51,7 @@ class StartWorkoutWithTimerViewController: UIViewController {
     private let customAlert = CustomAlert()
     
     private var durationTimer = 0
-    private var numberOfSet = 1
+    private var numberOfSet = 0
     private var shapeLayer = CAShapeLayer()
     private var timer = Timer()
     private var tapLabel = UIGestureRecognizer()
@@ -126,6 +126,7 @@ class StartWorkoutWithTimerViewController: UIViewController {
     }
     
     @objc private func startTimer() {
+        print("!!")
         detailsView.editingButton.isEnabled = false
         detailsView.nextSetButton.isEnabled = false
         tapLabel.isEnabled = false
@@ -145,7 +146,6 @@ class StartWorkoutWithTimerViewController: UIViewController {
     
     @objc private func timerAction() {
         durationTimer -= 1
-        print(durationTimer)
         
         if durationTimer == 0 {
             timer.invalidate()

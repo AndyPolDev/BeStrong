@@ -27,6 +27,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         label.textColor = .white
         label.textAlignment = .center
         label.font = .robotoBold48()
+        label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -53,11 +54,31 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     
     func cellConfigure(model: ResultWorkout) {
         nameLabel.text = model.name
-        numberLabel.text = "\(model.result)"
+        if model.result != 0 {
+            numberLabel.text = "\(model.result)"
+        } else {
+            numberLabel.adjustsFontSizeToFitWidth = true
+            numberLabel.text = getTimeFromSecond(second: model.time)
+        }
         
         guard let imageData = model.imageData else { return }
         workoutImageView.image = UIImage(data: imageData)?.withRenderingMode(.alwaysTemplate)
     }
+    
+    private func getTimeFromSecond (second: Int) -> String {
+        let (min, sec) = { (secs: Int) -> (Int, Int) in
+            return (secs / 60, secs % 60)}(second)
+        
+        if min == 0 {
+            return "\(sec) sec"
+        } else if sec == 0 {
+            return "\(min) min"
+        } else {
+            return "\(min):\(sec)"
+        }
+    }
+    
+//MARK: - Set Constraints
     
     private func setConstraints() {
         
@@ -75,7 +96,8 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             numberLabel.centerYAnchor.constraint(equalTo: workoutImageView.centerYAnchor),
-            numberLabel.leadingAnchor.constraint(equalTo: workoutImageView.trailingAnchor, constant: 10)
+            numberLabel.leadingAnchor.constraint(equalTo: workoutImageView.trailingAnchor, constant: 10),
+            numberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
 }

@@ -71,9 +71,9 @@ class ExercisesTableViewCell: UITableViewCell {
             
             switch differenceTime {
             case ..<0:
-                progressLabel.textColor = .specialGreen
+                progressLabel.textColor = UIColor(rgb: 0xCC0000)
             case 1...:
-                progressLabel.textColor = .specialDarkYellow
+                progressLabel.textColor = .specialGreen
             default:
                 progressLabel.textColor = .specialGray
             }
@@ -87,9 +87,9 @@ class ExercisesTableViewCell: UITableViewCell {
             
             switch differenceReps {
             case ..<0:
-                progressLabel.textColor = .specialGreen
+                progressLabel.textColor = UIColor(rgb: 0xCC0000)
             case 1...:
-                progressLabel.textColor = .specialDarkYellow
+                progressLabel.textColor = .specialGreen
             default:
                 progressLabel.textColor = .specialGray
             }
@@ -105,7 +105,7 @@ class ExercisesTableViewCell: UITableViewCell {
         } else if sec == 0 {
             return "\(min) min"
         } else {
-            return "\(min) min \(sec) sec"
+            return "\(min):\(sec)"
         }
     }
     

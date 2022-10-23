@@ -68,13 +68,15 @@ class ProgressView: UIView {
                 .filter(predicateName)
                 .sorted(byKeyPath: "workoutName")
             var result = 0
+            var timer = 0
             var image: Data?
             workoutModel.forEach { model in
                 result += model.workoutReps
+                timer += model.workoutTimer
                 image = model.workoutImage
             }
             
-            let resultModel = ResultWorkout(name: name, result: result, imageData: image)
+            let resultModel = ResultWorkout(name: name, result: result, time: timer, imageData: image)
             resultWorkout.append(resultModel)
         }
     }

@@ -58,7 +58,6 @@
 		A18DD59F28F053FF00920596 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18DD59E28F053FF00920596 /* ProgressView.swift */; };
 		A1A61EE628F4057100DEA1ED /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A61EE528F4057100DEA1ED /* UserModel.swift */; };
 		A1A61EE828F48D1500DEA1ED /* GalleryOrCameraAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A61EE728F48D1500DEA1ED /* GalleryOrCameraAlert.swift */; };
-		A1DC388A28F6AE2200FC6996 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DC388928F6AE2200FC6996 /* File.swift */; };
 		A1DC388C28F6AF3200FC6996 /* ResultWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DC388B28F6AF3200FC6996 /* ResultWorkout.swift */; };
 /* End PBXBuildFile section */
 
@@ -114,7 +113,6 @@
 		A18DD59E28F053FF00920596 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		A1A61EE528F4057100DEA1ED /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		A1A61EE728F48D1500DEA1ED /* GalleryOrCameraAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryOrCameraAlert.swift; sourceTree = "<group>"; };
-		A1DC388928F6AE2200FC6996 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		A1DC388B28F6AF3200FC6996 /* ResultWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultWorkout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -247,7 +245,6 @@
 				8474876228C76CFF00C122CC /* StartWorkoutWithTimerViewController.swift */,
 				84956B0E28DB28E4009692AB /* ProfileViewController.swift */,
 				84F025C028C8A9D100279F43 /* EditingProfileViewController.swift */,
-				A1DC388928F6AE2200FC6996 /* File.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -473,7 +470,6 @@
 				8474876628C78BF400C122CC /* DetailsWithTimerView.swift in Sources */,
 				84D5646728B8D208004A25ED /* WeatherView.swift in Sources */,
 				84F025C128C8A9D100279F43 /* EditingProfileViewController.swift in Sources */,
-				A1DC388A28F6AE2200FC6996 /* File.swift in Sources */,
 				84F025C628C8D66900279F43 /* UITextField + Extension.swift in Sources */,
 				84717E5328BCC7B200737FA7 /* UIStackView + Extension.swift in Sources */,
 				84BE16D228BAA04E001BC967 /* UIView + Extension.swift in Sources */,

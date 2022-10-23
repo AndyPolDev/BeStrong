@@ -40,7 +40,7 @@ class StartWorkoutWithRepsViewController: UIViewController {
     var workoutModel = WorkoutModel()
     let customAlert = CustomAlert()
     
-    private var numberOfSet = 1
+    private var numberOfSet = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
