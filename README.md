@@ -61,10 +61,15 @@ ___
 
 ### Работа приложения
 ![OnboardingVC](Documentation/Onboarding.gif)
+
 ![MainVC](Documentation/MainVC.gif)
+
 ![AddWorkoutVC](Documentation/AddWorkout.gif)
+
 ![EditingWorkoutVC](Documentation/EditingWorkoutVC.gif)
+
 ![StatisticsVC](Documentation/StatisticsVC.gif)
+
 ![ProfileVC](Documentation/ProfileVC.gif)
 ___
 
