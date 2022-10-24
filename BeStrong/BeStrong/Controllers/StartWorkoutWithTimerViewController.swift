@@ -105,8 +105,6 @@ class StartWorkoutWithTimerViewController: UIViewController {
         durationTimer = workoutModel.workoutTimer
     }
     
-    
-    
     @objc private func closeButtonPressed() {
         timer.invalidate()
         dismiss(animated: true)
@@ -126,7 +124,6 @@ class StartWorkoutWithTimerViewController: UIViewController {
     }
     
     @objc private func startTimer() {
-        print("!!")
         detailsView.editingButton.isEnabled = false
         detailsView.nextSetButton.isEnabled = false
         tapLabel.isEnabled = false
