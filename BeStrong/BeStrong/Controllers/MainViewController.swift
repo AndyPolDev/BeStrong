@@ -1,5 +1,6 @@
 import UIKit
 import RealmSwift
+import CoreLocation
 
 class MainViewController: UIViewController {
     
@@ -77,6 +78,7 @@ class MainViewController: UIViewController {
     private let localRealm = try! Realm()
     private var workoutArray: Results<WorkoutModel>!
     private var userArray: Results<UserModel>!
+    private let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,6 +88,7 @@ class MainViewController: UIViewController {
         setupViews()
         setConstraints()
         setDelegates()
+        setupLocationManager()
     }
     
     override func viewDidLayoutSubviews() {
@@ -100,7 +103,7 @@ class MainViewController: UIViewController {
         setupParameters()
         getWorkouts(date: selectedDate)
         tableView.reloadData()
-        getWeather()
+        locationManager.requestLocation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -131,7 +134,12 @@ class MainViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         calendarView.cellCollectionViewDelegate = self
-        
+        locationManager.delegate = self
+    }
+    
+    private func setupLocationManager() {
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
     private func getWorkouts(date: Date) {
@@ -179,8 +187,8 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func getWeather() {
-        NetworkDataFetch.shared.fetchWeather { [weak self] result, error in
+    private func getWeather(lat: CLLocationDegrees, lon: CLLocationDegrees) {
+        NetworkDataFetch.shared.fetchWeather(lat: lat, lon: lon) { [weak self] result, error in
             guard let self = self else { return }
             if let model = result {
                 self.weatherView.setWeather(model: model)
@@ -232,8 +240,6 @@ extension MainViewController: StartWorkoutProtocol {
     }
 }
 
-
-
 //MARK: - UICollectionViewDataSource
 
 extension MainViewController: UITableViewDataSource {
@@ -274,6 +280,23 @@ extension MainViewController: UITableViewDelegate {
         action.image = UIImage(named: "delete")
         
         return UISwipeActionsConfiguration(actions: [action])
+    }
+}
+
+//MARK: - CLLocationManagerDelegate
+
+extension MainViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let safelocation = locations.last {
+            locationManager.stopUpdatingLocation()
+            let lat = safelocation.coordinate.latitude
+            let lon = safelocation.coordinate.longitude
+            getWeather(lat: lat, lon: lon)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
     }
 }
 
