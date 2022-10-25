@@ -30,6 +30,7 @@ ___
 15. NSLayoutConstraint
 16. Timer
 17. UITGestureRecognizer
+18. CoreLocation
 ___
 
 ## <a id="Presentation"></a>Презентация
@@ -75,8 +76,7 @@ ___
 
 ## <a id="NextSteps"></a> В планах
 
-1. Добавить геолокацию
-2. Добавить иконки для упражнений
+1. Добавить иконки для упражнений
 ___
 
 

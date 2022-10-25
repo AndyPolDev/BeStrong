@@ -1,12 +1,13 @@
 import Foundation
+import CoreLocation
 
 class NetworkDataFetch {
     
     static let shared = NetworkDataFetch()
     private init() {}
     
-    func fetchWeather(responce: @escaping (WeatherModel?, Error?) -> Void) {
-        NetworkRequest.shared.requestData { result in
+    func fetchWeather(lat: CLLocationDegrees, lon: CLLocationDegrees, responce: @escaping (WeatherModel?, Error?) -> Void) {
+        NetworkRequest.shared.requestData(lat: lat, lon: lon) { result in
             switch result {
             case .success(let data):
                 do {
